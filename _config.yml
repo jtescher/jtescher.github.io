@@ -17,6 +17,7 @@ paginate: 5
 
 version: 1.0.0
 github:
+  download: https://github.com/jtescher/jtescher.github.io/archive/master.zip
   repo: https://github.com/jtescher/jtescher.github.io
   
 ga_domain: jtescher.github.io
