@@ -2,7 +2,7 @@ name: Blog
 markdown: redcarpet
 pygments: true
 
-permalink: pretty
+permalink: /:title/
 title: Blog
 tagline: 
 description:
