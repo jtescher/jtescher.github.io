@@ -19,3 +19,6 @@ version: 1.0.0
 github:
   repo: https://github.com/jtescher/jtescher.github.io
   
+ga_domain: jtescher.github.io
+ga_tracking_id: UA-47260751-2
+  
