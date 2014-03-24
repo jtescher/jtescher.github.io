@@ -9,17 +9,16 @@ description:
 url: http://jtescher.github.io/
 timezone: 'America/Los_Angeles'
 
-twitter: jatescher
+twitter: https://twitter.com/jatescher
 author:
   name: 'Julian Tescher'
   url: https://twitter.com/jatescher
   
 paginate: 5
 
-
 version: 1.0.0
 github:
-  username: jtescher
+  profile: https://github.com/jtescher/
   download: https://github.com/jtescher/jtescher.github.io/archive/master.zip
   repo: https://github.com/jtescher/jtescher.github.io
   
