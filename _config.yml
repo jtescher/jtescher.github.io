@@ -12,6 +12,7 @@ timezone: 'America/Los_Angeles'
 twitter: https://twitter.com/jatescher
 author:
   name: 'Julian Tescher'
+  email: jatescher@gmail.com
   url: https://twitter.com/jatescher
   
 paginate: 5
