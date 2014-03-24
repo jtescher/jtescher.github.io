@@ -6,7 +6,7 @@ permalink: /:title/
 title: Blog
 tagline: 
 description:
-url: http://jtescher.github.io/
+url: https://jtescher.github.io
 timezone: 'America/Los_Angeles'
 
 twitter: https://twitter.com/jatescher
@@ -19,7 +19,7 @@ paginate: 5
 
 version: 1.0.0
 github:
-  profile: https://github.com/jtescher/
+  profile: https://github.com/jtescher
   download: https://github.com/jtescher/jtescher.github.io/archive/master.zip
   repo: https://github.com/jtescher/jtescher.github.io
   
