@@ -1,0 +1,21 @@
+name: Blog
+markdown: redcarpet
+pygments: true
+
+permalink: pretty
+title: Blog
+tagline: 
+description:
+url: http://jtescher.github.io/
+timezone: 'America/Los_Angeles'
+
+author:
+  name: 'Julian Tescher'
+  url: https://twitter.com/jatescher
+  
+paginate: 5
+
+version: 1.0.0
+github:
+  repo: https://github.com/jtescher/jtescher.github.io
+  
