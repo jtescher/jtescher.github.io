@@ -5,7 +5,7 @@ date:   2014-03-23 17:00:00
 categories: rails postgresql postgres aws elastic beanstalk
 ---
 
-![AWS Elastic Beanstalk](https://raw.githubusercontent.com/jtescher/blog/master/posts/how-to-set-up-a-rails-4-1-app-on-aws-with-elastic-beanstalk-and-postgresql/assets/aws-logo.png)
+![AWS Elastic Beanstalk](https://jtescher.github.io/assets/how-to-set-up-a-rails-4-1-app-on-aws-with-elastic-beanstalk-and-postgresql/aws-logo.png)
 
 There are many services that provide the ability to get a Rails app up and running quickly these days but my current favorite is Amazon's [Elastic Beanstalk](http://aws.amazon.com/elasticbeanstalk/). The service is aptly described by Amazon as follows:
 
@@ -171,7 +171,7 @@ The environment should now be running. To see the status and url:
     
 If you open the URL that is returned by this command ( should be URL: your-app-env.elasticbeanstalk.com ) you should see the Elastic Beanstalk welcome page:
 
-![Elastic Beanstalk Welcome Page](https://raw.githubusercontent.com/jtescher/blog/master/posts/how-to-set-up-a-rails-4-1-app-on-aws-with-elastic-beanstalk-and-postgresql/assets/welcome.png)
+![Elastic Beanstalk Welcome Page](https://jtescher.github.io/assets/how-to-set-up-a-rails-4-1-app-on-aws-with-elastic-beanstalk-and-postgresql/welcome.png)
 
 ## Getting the pg gem to work on elasticbeanstalk
 The `postgresql-devel` yum package is required to install the pg gem on amazon linux and configuring packages on Elastic Beanstalk instances is as simple as dropping a YAML formatted .config file in a top level .ebextensions folder.
@@ -202,7 +202,7 @@ Then go to [console.aws.amazon.com/elasticbeanstalk/home](https://console.aws.am
 
 After you save it should look like this:
 
-![Elastic Beanstalk Environment Variable Config](https://raw.githubusercontent.com/jtescher/blog/master/posts/how-to-set-up-a-rails-4-1-app-on-aws-with-elastic-beanstalk-and-postgresql/assets/env-var-config.png)
+![Elastic Beanstalk Environment Variable Config](https://jtescher.github.io/assets/how-to-set-up-a-rails-4-1-app-on-aws-with-elastic-beanstalk-and-postgresql/env-var-config.png)
 
 ## Adding some scaffolding
 To finish up let's add a post resource so we can start blogging:
@@ -224,4 +224,4 @@ If you visit [https://console.aws.amazon.com/elasticbeanstalk/home](https://cons
 
 Once that finishes you have your functional app running Rails and postgres! Go to your-app-env.elasticbeanstalk.com/posts and your done!:
 
-![Done: List of posts](https://raw.githubusercontent.com/jtescher/blog/master/posts/how-to-set-up-a-rails-4-1-app-on-aws-with-elastic-beanstalk-and-postgresql/assets/posts-index.png)
+![Done: List of posts](https://jtescher.github.io/assets/how-to-set-up-a-rails-4-1-app-on-aws-with-elastic-beanstalk-and-postgresql/posts-index.png)
