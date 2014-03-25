@@ -7,7 +7,7 @@ categories: rails postgresql postgres aws elastic beanstalk
 
 ![AWS Elastic Beanstalk](https://jtescher.github.io/assets/how-to-set-up-a-rails-4-1-app-on-aws-with-elastic-beanstalk-and-postgresql/aws-logo.png)
 
-There are many services that provide the ability to get a Rails app up and running quickly these days but my current favorite is Amazon's [Elastic Beanstalk](http://aws.amazon.com/elasticbeanstalk/). The service is aptly described by Amazon as follows:
+There are many services that provide the ability to get a Rails app up and running quickly these days, but my current favorite is Amazon's [Elastic Beanstalk](http://aws.amazon.com/elasticbeanstalk/). The service is aptly described by Amazon as follows:
 
 > AWS Elastic Beanstalk makes it even easier for developers to quickly deploy and manage applications in the AWS cloud. Developers simply upload their application, and Elastic Beanstalk automatically handles the deployment details of capacity provisioning, load balancing, auto-scaling, and application health monitoring.
 
@@ -193,14 +193,14 @@ Database credentials should never be hard coded and Elastic Beanstalk makes mana
       port: <%= ENV['RDS_PORT'] %>
       
 ## Configuring secrets.yml
-By default Rails now how a secrets.yml file and your production keys and settings should be set as environment variables there. The default environment only requires a SECRET_KEY_BASE variable to be defined, so let's add that to your environment. First run:
+By default Rails knows how a secrets.yml file and your production keys and settings should be set as environment variables there. The default environment only requires a SECRET_KEY_BASE variable to be defined, so let's add that to your environment. First run:
 
     $ bundle exec rake secret
     5387fca6a0a69d945bb57e8be5bce3a119292216dfc95b270275c518641aa3e8db14a5ead261b1d50332a92ed860c544ef24356100ccb391507b1c5b8d46f39b
 
 Then go to [console.aws.amazon.com/elasticbeanstalk/home](https://console.aws.amazon.com/elasticbeanstalk/home) and in blog-env on the left under configuration click on the cog next to 'Software Configuration'. At the bottom, enter SECRET_KEY_BASE on the left and the output of `rake secret` on the right.
 
-After you save it should look like this:
+After you save, it should look like this:
 
 ![Elastic Beanstalk Environment Variable Config](https://jtescher.github.io/assets/how-to-set-up-a-rails-4-1-app-on-aws-with-elastic-beanstalk-and-postgresql/env-var-config.png)
 
@@ -222,6 +222,6 @@ Then deploy with:
     
 If you visit [https://console.aws.amazon.com/elasticbeanstalk/home](https://console.aws.amazon.com/elasticbeanstalk/home) you should see the progress of your app as it deploys.
 
-Once that finishes you have your functional app running Rails and postgres! Go to your-app-env.elasticbeanstalk.com/posts and your done!:
+Once that finishes you have your functional app running Rails and postgres! Go to your-app-env.elasticbeanstalk.com/posts and you're done!:
 
 ![Done: List of posts](https://jtescher.github.io/assets/how-to-set-up-a-rails-4-1-app-on-aws-with-elastic-beanstalk-and-postgresql/posts-index.png)
