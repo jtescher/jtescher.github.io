@@ -3,8 +3,8 @@ markdown: redcarpet
 pygments: true
 
 permalink: /:title/
-title: Julian Tescher does the internet
-tagline: So wow.
+title: Julian Tescher Does The Internet
+tagline: so wow.
 description: Julian Tescher does the internet. So wow.
 url: https://jtescher.github.io
 timezone: 'America/Los_Angeles'
