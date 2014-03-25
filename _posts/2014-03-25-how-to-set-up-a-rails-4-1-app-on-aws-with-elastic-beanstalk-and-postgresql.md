@@ -36,7 +36,7 @@ and then download the Elastic Beanstalk Command Line Tools via Homebrew (or [her
     $ brew install aws-elasticbeanstalk
 
 ## Create the app:
-The most current version of rails at the time of this writing is 4.1.0.beta1 so that's what we will use now.
+The most current version of rails at the time of this writing is 4.1.0.rc1 so that's what we will use now.
 
     $ gem install rails -v 4.1.0.rc1
     $ rails new blog --database=postgresql
