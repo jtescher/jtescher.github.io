@@ -91,7 +91,7 @@ I would choose the following settings, but for a description of each option see 
     Attach an instance profile (current value is "[Create a default instance profile]"): 1
 
 Then create an optionsettings file in the newly created .elasticbeanstalk directory called optionsettings.blog-env
-(or your custom env name as the extention if you customized it)
+(or your custom env name as the extension if you customized it)
    
     # .elasticbeanstalk/optionsettings.blog-env
     [aws:autoscaling:asg]
