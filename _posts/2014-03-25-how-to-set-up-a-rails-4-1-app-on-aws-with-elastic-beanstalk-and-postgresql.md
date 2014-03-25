@@ -1,19 +1,32 @@
 ---
 layout: post
 title:  "How to set up a Rails 4.1 app on AWS with Elastic Beanstalk and PostgreSQL"
-date:   2014-03-23 17:00:00
+date:   2014-03-25 09:00:00
 categories: rails postgresql postgres aws elastic beanstalk
 ---
 
 ![AWS Elastic Beanstalk](https://jtescher.github.io/assets/how-to-set-up-a-rails-4-1-app-on-aws-with-elastic-beanstalk-and-postgresql/aws-logo.png)
 
-There are many services that provide the ability to get a Rails app up and running quickly these days, but my current favorite is Amazon's [Elastic Beanstalk](http://aws.amazon.com/elasticbeanstalk/). The service is aptly described by Amazon as follows:
+Managing ops on a small team can be a real pain. At [WillCall](https://www.getwillcall.com/) our infrastructure is
+pretty simple but we still have to spin up and down lots of servers every day to handle the varying traffic across our
+services. We started out doing this manually with [chef](http://www.getchef.com/), but it was sometimes error-prone and
+started to become a full time job.
+
+For simple projects, tools like [heroku](https://www.heroku.com/) can be perfect. Great for prototyping apps and testing
+out different ideas without a lot of hassle. But when your project gets more complicated and you want to have more
+control of your servers, load balancers, workers, auto-scaling conditions, etc, you will feel this pain as well.
+
+There are many services that provide the ability to get a Rails app up and running quickly while still keeping full
+control of your infrastructure, and my current favorite is Amazon's
+[Elastic Beanstalk](http://aws.amazon.com/elasticbeanstalk/). The service is aptly described by Amazon as follows:
 
 > AWS Elastic Beanstalk makes it even easier for developers to quickly deploy and manage applications in the AWS cloud. Developers simply upload their application, and Elastic Beanstalk automatically handles the deployment details of capacity provisioning, load balancing, auto-scaling, and application health monitoring.
 
 Now that Amazon [supports PostgreSQL via RDS](http://aws.amazon.com/rds/postgresql/) having a fully-managed postgres-backed Rails app has never been easier!
 
 You can find all of the code for this post at [github.com/jtescher/example-rails-elasticbeanstalk-blog](https://github.com/jtescher/example-rails-elasticbeanstalk-blog)
+
+If you get stuck or have other issues the [documentation for Elastic Beanstalk](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html) is pretty good.
 
 ## Getting Started:
 Sign up for an AWS account via the instructions at [console.aws.amazon.com/elasticbeanstalk](https://console.aws.amazon.com/elasticbeanstalk/) 
