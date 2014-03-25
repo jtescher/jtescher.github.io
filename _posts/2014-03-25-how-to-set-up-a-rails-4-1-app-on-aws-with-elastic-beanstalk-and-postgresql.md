@@ -219,7 +219,7 @@ the following:
       
 ## Configuring secrets.yml
 By default Rails now includes a secrets.yml file and your production keys and settings should be set there as
-environment variables. The default environment only requires a SECRET_KEY_BASE variable to be defined, so let's
+environment variables. The default environment only requires a SECRET&#95;KEY&#95;BASE variable to be defined, so let's
 add that to your environment. First run:
 
     $ bundle exec rake secret
@@ -227,7 +227,7 @@ add that to your environment. First run:
 
 Then go to [console.aws.amazon.com/elasticbeanstalk/home](https://console.aws.amazon.com/elasticbeanstalk/home) and in
 blog-env on the left under configuration click on the cog next to 'Software Configuration'. At the bottom, enter
-SECRET_KEY_BASE on the left and the output of `rake secret` on the right.
+SECRET&#95;KEY&#95;BASE on the left and the output of `rake secret` on the right.
 
 After you save, it should look like this:
 
