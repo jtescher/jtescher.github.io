@@ -4,8 +4,8 @@ pygments: true
 
 permalink: /:title/
 title: Julian Tescher Does The Internet
-tagline: so wow.
-description: Julian Tescher does the internet. So wow.
+tagline: so wow
+description: Julian Tescher Does The Internet. So Wow.
 url: https://jtescher.github.io
 timezone: 'America/Los_Angeles'
 
