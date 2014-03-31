@@ -43,7 +43,7 @@ the callbacks that destroy the associated comments would never be run!
 
 The Rails guides have a list of 
 [dangerous methods that skip callbacks](http://guides.rubyonrails.org/active_record_callbacks.html#skipping-callbacks)
-for various reasons and should probably be avoided by ~~junior~~ most 
+for various reasons and should probably be avoided by <del>junior</del> most
 developers. They include:
 
 * decrement
