@@ -5,11 +5,19 @@ date:   2014-03-31 11:00:00
 categories: rails active_record foreign_key_constraints data integrity
 ---
 
-Keeping your data consistent is always a challenge. We all have that co-worker 
-(and have been that co-worker) who SSHs into a server and runs SQL statements 
-against live data. But integrity issues can creep in unintentionally if you do
-not have a deep understanding of how ActiveRecord callbacks and validations 
-work and which methods skip them entirely!
+We all have that co-worker (and have been that co-worker) who SSHs into a
+server and runs SQL statements against live data. On staging servers this
+can be a minor issue if things go wrong, but in production it can be disastrous.
+At [WillCall](https://www.getwillcall.com) we often have to spend time
+putting our staging data into different configurations for testing purposes
+and have felt the pain of inconsistent data more than once.
+
+Today we're going to talk about data consistency, why keeping your data
+consistent is always a challenge, and what you can do about it.
+
+Integrity issues can creep in unintentionally if you do not have a
+deep understanding of how ActiveRecord callbacks and validations work and
+which methods skip them entirely!
 
 For example if you have a `Post` model and each `Post` had many `Comments`, when you 
 call `post.destroy` with the `dependent: :destroy` option, it will destroy the 
