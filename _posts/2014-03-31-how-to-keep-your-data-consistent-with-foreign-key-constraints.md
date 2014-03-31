@@ -5,6 +5,8 @@ date:   2014-03-31 11:00:00
 categories: rails active_record foreign_key_constraints data integrity
 ---
 
+![Datacenter](https://jtescher.github.io/assets/how-to-keep-your-data-consistent-with-foreign-key-constraints/datacenter.jpg)
+
 We all have that co-worker (and have been that co-worker) who SSHs into a
 server and runs SQL statements against live data. On staging servers this
 can be a minor issue if things go wrong, but in production it can be disastrous.
