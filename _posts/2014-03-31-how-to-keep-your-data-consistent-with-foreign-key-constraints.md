@@ -56,7 +56,7 @@ developers. They include:
 Foreign key constraints are the database's solution to this data integrity 
 problem. They are basically a way to tell the database to only allow actual 
 Post IDs in the comments `post_id` column. This means if you tried to add a 
-comment to a non-existent or deleted post, or delete a post that has comments 
+comment to a non-existent or deleted post, or delete a post that has comments, 
 it would raise an `ActiveRecord::InvalidForeignKey` exception.
 
 Rails does not have support for foreign key constraints because
