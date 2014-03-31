@@ -110,14 +110,14 @@ gem 'schema_plus', '~> 1.4.1'
 And then install with `$ bundle install`. And your done! When you start your 
 next project this is definitely something I would try playing with. There are 
 also many options you can pass that customize your foreign key constraints 
-described [here](https://github.com/lomba/schema_plus#foreign-key-constraints)
+described [here](https://github.com/lomba/schema_plus#foreign-key-constraints).
 
 
 ### Testing Integrity
 
 Finally adding a few tests is always a good thing, so if you want to test that 
 you cannot accidentally violate your data integrity you could do something 
-like this in [rspec](https://github.com/rspec/rspec)
+like this in [rspec](https://github.com/rspec/rspec).
 
 ```ruby
 require 'spec_helper'
