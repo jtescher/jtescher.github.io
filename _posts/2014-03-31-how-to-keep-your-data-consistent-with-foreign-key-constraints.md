@@ -38,18 +38,18 @@ The Rails guides have a list of
 for various reasons and should probably be avoided by ~~junior~~ most 
 developers. They include:
 
-*decrement
-*decrement_counter
-*delete
-*delete_all
-*increment
-*increment_counter
-*toggle
-*touch
-*update_column
-*update_columns
-*update_all
-*update_counters
+* decrement
+* decrement_counter
+* delete
+* delete_all
+* increment
+* increment_counter
+* toggle
+* touch
+* update_column
+* update_columns
+* update_all
+* update_counters
 
 ### Solution: Foreign key constraints.
 
