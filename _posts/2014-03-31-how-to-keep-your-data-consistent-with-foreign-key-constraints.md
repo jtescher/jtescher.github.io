@@ -11,7 +11,7 @@ against live data. But integrity issues can creep in unintentionally if you do
 not have a deep understanding of how ActiveRecord callbacks and validations 
 work and which methods skip them entirely!
 
-For example if you have a Post model and each Post had many Comments, when you 
+For example if you have a `Post` model and each `Post` had many `Comments`, when you 
 call `post.destroy` with the `dependent: :destroy` option, it will destroy the 
 associated comments as well.
 
@@ -107,7 +107,7 @@ the following to your Gemfile:
 gem 'schema_plus', '~> 1.4.1'
 ```
 
-And then install with `$ bundle install`. And your done! When you start your 
+And then install with `$ bundle install`. And you're done! When you start your 
 next project this is definitely something I would try playing with. There are 
 also many options you can pass that customize your foreign key constraints 
 described [here](https://github.com/lomba/schema_plus#foreign-key-constraints).
