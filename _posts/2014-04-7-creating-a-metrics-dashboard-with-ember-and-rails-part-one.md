@@ -5,7 +5,7 @@ date:   2014-04-07 09:00:00
 categories: rails ember.js metrics
 ---
 
-_This is part one of a series on building a metrics dashboard with ember bootstrap and Rails. Over the next few weeks
+_This is part one of a series on building a metrics dashboard with Ember, Bootstrap, and Rails. Over the next few weeks
 I will be building out more functionality and writing posts to cover that._
 
 There are some services that will provide dashboards and visualizations for you like
