@@ -6,14 +6,14 @@ categories: rails ember.js metrics
 ---
 
 _This is part one of a series on building a metrics dashboard with ember bootstrap and Rails. Over the next few weeks
-I will be building out more functionality._
+I will be building out more functionality and writing posts to cover that._
 
 There are some services that will provide dashboards and visualizations for you like
 [Geckoboard](http://www.geckoboard.com/), but once you need to provide custom analytics and graphs to clients or
 co-workers you will need something a little more flexible.
 
 Today we're going to assemble the first pieces of this app by creating a Rails server, an Ember.js App and some basic
-Bootstrap style.
+Bootstrap styling.
 
 You can find all of the code for this post at
 [github.com/jtescher/example-ember-rails-dashboard](https://github.com/jtescher/example-ember-rails-dashboard).
@@ -113,7 +113,7 @@ should look like this:
 //= require_tree .
 ```
 
-Also I renamed the generated `app/assets/javascripts/application.js.coffee` file to be
+I also renamed the generated `app/assets/javascripts/application.js.coffee` file to be
 `app/assets/javascripts/app.js.coffee` to not conflict with the first application.js file.
 
 Next move the html from `home/index.html.erb` and replace it with the following:
