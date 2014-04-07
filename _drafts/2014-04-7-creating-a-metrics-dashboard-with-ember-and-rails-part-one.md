@@ -5,15 +5,15 @@ date:   2014-04-07 09:00:00
 categories: rails ember.js metrics
 ---
 
-Surfacing simple metrics can be easy. If you have an existing Rails app, you can simply add an admin-only section
-that renders some simple tables. This works for a little while, but as you start exposing more information and
-your data set grows, this gets out of hand.
+_This is part one of a series on building a metrics dashboard with ember bootstrap and rails. Over the next few weeks
+I will be building out more functionality._
 
-There are some services that will handle parts of this for you like [Geckoboard](http://www.geckoboard.com/), but once
-you need to expose a partner dashboard, or use charts that Geckoboard does not provide, a custom solution is required.
+There are some services that will provide dashboards and visualizations for you like
+[Geckoboard](http://www.geckoboard.com/), but once you need to provide custom analytics and graphs to clients or
+co-workers you will need something a little more flexible.
 
-Today we're going to talk about a fully client side solution using Ember.js. We will expose the metrics we collect from
-our various services via API's and collect them in a rails app specific API.
+Today we're going to assemble the first pieces of this app by creating a rails server, an Ember.js App and some basic
+Bootstrap style.
 
 You can find all of the code for this post at
 [github.com/jtescher/example-ember-rails-dashboard](https://github.com/jtescher/example-ember-rails-dashboard).
