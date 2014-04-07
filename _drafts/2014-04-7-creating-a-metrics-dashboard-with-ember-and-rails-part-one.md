@@ -10,7 +10,7 @@ that renders some simple tables. This works for a little while, but as you start
 your data set grows, this gets out of hand.
 
 There are some services that will handle parts of this for you like [Geckoboard](http://www.geckoboard.com/), but once
-you need to expost a partner dashboard, or use charts that geckoboard does not provide, a custom solution is required.
+you need to expose a partner dashboard, or use charts that Geckoboard does not provide, a custom solution is required.
 
 Today we're going to talk about a fully client side solution using Ember.js. We will expose the metrics we collect from
 our various services via API's and collect them in a rails app specific API.
