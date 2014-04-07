@@ -5,14 +5,14 @@ date:   2014-04-07 09:00:00
 categories: rails ember.js metrics
 ---
 
-_This is part one of a series on building a metrics dashboard with ember bootstrap and rails. Over the next few weeks
+_This is part one of a series on building a metrics dashboard with ember bootstrap and Rails. Over the next few weeks
 I will be building out more functionality._
 
 There are some services that will provide dashboards and visualizations for you like
 [Geckoboard](http://www.geckoboard.com/), but once you need to provide custom analytics and graphs to clients or
 co-workers you will need something a little more flexible.
 
-Today we're going to assemble the first pieces of this app by creating a rails server, an Ember.js App and some basic
+Today we're going to assemble the first pieces of this app by creating a Rails server, an Ember.js App and some basic
 Bootstrap style.
 
 You can find all of the code for this post at
