@@ -50,7 +50,7 @@ end
 If you start your server now with `$ rails server` and open up [localhost:3000](http://localhost:3000) you should see
 the following:
 
-![Home screen](http://localhost:4000/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-one/home-screen.png)
+![Home screen](https://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-one/home-screen.png)
 
 The Theme
 ---------
@@ -84,4 +84,56 @@ Then we can change the `home/index.html.erb` view to the following:
 
 And when you restart the server you should see:
 
-![Home screen](http://localhost:4000/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-one/bootstrap-defaults.png)
+![Bootstrap Defaults](https://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-one/bootstrap-defaults.png)
+
+The Ember.js App
+----------------
+
+
+We can now add the `ember-rails` and `ember-source` gems for Ember assets and scaffolding to our `Gemfile`.
+
+```ruby
+...
+# JS framework for creating ambitious web applications.
+gem 'ember-rails',  '~> 0.14.1'
+gem 'ember-source', '~> 1.5.0'
+```
+
+And install the Ember assets with:
+
+```bash
+$ rails generate ember:bootstrap
+```
+
+We can also remove turbolinks as ember will handle all the routing after the first page load. Your `application.js` file
+should look like this:
+
+```js
+//= require jquery
+//= require_tree .
+```
+
+Also I renamed the generated `app/assets/javascripts/application.js.coffee` file to be
+`app/assets/javascripts/app.js.coffee` to not conflict with the first application.js file.
+
+Next move the html from `home/index.html.erb` and replace it with the following:
+
+```erb
+<% # Rendered Entirely in EmberJS. See app/assets/javascripts %>
+```
+
+Then we can move the html generation to ember by placing it in the top level `application.hbs` handlebars file.
+
+```html
+<!-- app/assets/javascripts/templates/application.hbs -->
+<div class='container'>
+  <div class='jumbotron'>
+    <h1>Hello from Ember.js!</h1>
+    <p>The link to the home page is {{#link-to 'application'}}here{{/link-to}}</p>
+  </div>
+</div>
+```
+
+And the end of part one should be rendered by Ember looking like this:
+
+![Final](https://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-one/ember-home-screen.png)
