@@ -6,7 +6,8 @@ categories: rails ember.js metrics
 ---
 
 *This is part one of a series on building a metrics dashboard with Ember, Bootstrap, and Rails. Over the next few weeks
-I will be building out more functionality and writing posts to cover that.*
+I will be building out more functionality and writing posts to cover that. You can find part two
+[here](/creating-a-metrics-dashboard-with-ember-and-rails-part-two)*
 
 There are some services that will provide dashboards and visualizations for you like
 [Geckoboard](http://www.geckoboard.com/), but once you need to provide custom analytics and graphs to clients or
