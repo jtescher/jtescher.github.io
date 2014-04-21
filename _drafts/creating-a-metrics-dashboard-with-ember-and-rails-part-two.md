@@ -92,3 +92,55 @@ Dashboard.Router.map ()->
 ```
 
 And we can then create an idea of what we want the page to look like by adding `app/assets/javascripts/templates/orders.hbs`
+
+``` html
+<h1>Orders</h1>
+<table class='table table-striped'>
+  <tr>
+    <th>#</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Quantity</th>
+    <th>Revenue</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>James</td>
+    <td>Deen</td>
+    <td>1</td>
+    <td>$10.00</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Alex</td>
+    <td>Baldwin</td>
+    <td>2</td>
+    <td>$20.00</td>
+  </tr>
+</table>
+
+<p>Total Quantity: <b>3</b></p>
+<p>Total Revenue: <b>$30</b></p>
+
+```
+
+Then we can add a link to this page in our `application.hbs` file:
+``` handlebars
+...
+<div class='collapse navbar-collapse' id='main-nav-collapse'>
+  <ul class='nav navbar-nav'>
+    {{#link-to 'index' tagName='li' activeClass='active'}}
+      {{#link-to 'index'}}Home{{/link-to}}
+    {{/link-to}}
+    {{#link-to 'orders' tagName='li' activeClass='active'}}
+      {{#link-to 'orders'}}Orders{{/link-to}}
+    {{/link-to}}
+  </ul>
+</div>
+...
+
+```
+
+Then if you reload and follow the orders nav link you should see this:
+
+![Ember application template](https://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-two/orders-screen.png)
