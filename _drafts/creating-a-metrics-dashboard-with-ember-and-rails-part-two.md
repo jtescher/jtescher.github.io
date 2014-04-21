@@ -25,36 +25,36 @@ Preparing the application
 Before we add any more content let's update our Ember application template and add a basic structure with some
 navigation in `app/assets/javascripts/templates/application.hbs`.
 
-``` Handlebars
+``` handlebars
 <div class='container'>
 
-    <header class='masthead'>
-        <nav class='navbar navbar-default' role='navigation'>
-            <div class='container-fluid'>
-                <div class='navbar-header'>
-                    <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#main-nav-collapse'>
-                        <span class='sr-only'>Toggle navigation</span>
-                        <span class='icon-bar'></span>
-                        <span class='icon-bar'></span>
-                        <span class='icon-bar'></span>
-                    </button>
-                    {{#link-to 'application' class='navbar-brand'}}Dashboard{{/link-to}}
-                </div>
+  <header class='masthead'>
+    <nav class='navbar navbar-default' role='navigation'>
+      <div class='container-fluid'>
+        <div class='navbar-header'>
+          <button type='button' class='navbar-toggle'data-toggle='collapse' data-target='#main-nav-collapse'>
+            <span class='sr-only'>Toggle navigation</span>
+            <span class='icon-bar'></span>
+            <span class='icon-bar'></span>
+            <span class='icon-bar'></span>
+          </button>
+          {{#link-to 'application' class='navbar-brand'}}Dashboard{{/link-to}}
+        </div>
 
-                <div class='collapse navbar-collapse' id='main-nav-collapse'>
-                    <ul class='nav navbar-nav'>
-                        {{#link-to 'index' tagName='li' activeClass='active'}}
-                            {{#link-to 'index'}}Home{{/link-to}}
-                        {{/link-to}}
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+        <div class='collapse navbar-collapse' id='main-nav-collapse'>
+          <ul class='nav navbar-nav'>
+            {{#link-to 'index' tagName='li' activeClass='active'}}
+              {{#link-to 'index'}}Home{{/link-to}}
+            {{/link-to}}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
 
-    <section class='main-content'>
-        {{outlet}}
-    </section>
+  <section class='main-content'>
+    {{outlet}}
+  </section>
 
 </div>
 
@@ -62,10 +62,10 @@ navigation in `app/assets/javascripts/templates/application.hbs`.
 
 And let's add an index template so we know when we're on the home page in `app/assets/javascripts/templates/index.hbs`.
 
-``` Handlebars
+``` handlebars
 <div class='jumbotron'>
-    <h1>Hello from Ember.js!</h1>
-    <p>Let's see some metrics.</p>
+  <h1>Hello from Ember.js!</h1>
+  <p>Let's see some metrics.</p>
 </div>
 
 ```
@@ -84,7 +84,7 @@ Lets create an example of this to display some financial data about our sales pr
 
 Step one is to create the Ember route to get to this URL. Let's edit `app/assets/javascripts/router.js.coffee` and add it:
 
-``` CoffeeScript
+``` coffeescript
 # app/assets/javascripts/router.js.coffee
 Dashboard.Router.map ()->
   @resource('orders')
