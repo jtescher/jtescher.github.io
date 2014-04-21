@@ -14,7 +14,9 @@ the Ember app that rendered our metrics page. If you followed along your page sh
 
 ![Part One Final](https://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-one/ember-home-screen.png)
 
-Today we're going to add some components and see how Ember keeps all your templates up to date as data changes.
+Today we're going to add some tables and see how data flows through an Ember app. If you are not familiar with Ember's
+conventions and idioms you should first read their
+[excellent documentation and guides](http://emberjs.com/guides/concepts/core-concepts/) before continuing here.
 
 Remember, if you get stuck you can find all of the code for this post at
 [github.com/jtescher/example-ember-rails-dashboard](https://github.com/jtescher/example-ember-rails-dashboard).
@@ -91,7 +93,7 @@ Dashboard.Router.map ()->
 
 ```
 
-And we can then create an idea of what we want the page to look like by adding `app/assets/javascripts/templates/orders.hbs`
+And we can then create an idea of what we want the page to look like by mocking up some static HTML in `app/assets/javascripts/templates/orders.hbs`
 
 ``` html
 <h1>Orders</h1>
@@ -124,7 +126,8 @@ And we can then create an idea of what we want the page to look like by adding `
 
 ```
 
-Then we can add a link to this page in our `application.hbs` file:
+Then we can add a link to this page in our `application.hbs` file (the double link-to is an an annoying hack but
+explained [here](https://github.com/emberjs/ember.js/issues/4387)):
 ``` handlebars
 ...
 <div class='collapse navbar-collapse' id='main-nav-collapse'>
@@ -232,9 +235,9 @@ If you reload the page it should now look like this:
 Formatting Values With Helpers
 ------------------------------
 
-There are a few good libraries for formatting currencies in JavaScript and Ember makes it simple to access these
-libraries in your handlebars templates. Let's add the [accounting.js](http://josscrowcroft.github.io/accounting.js/)
-library to format our revenue numbers.
+The image above looks pretty good but we seem to have lost our currency formatting. There are a few good libraries for
+formatting currencies in JavaScript and Ember makes it simple to access these libraries in your handlebars templates.
+Let's add the [accounting.js](http://josscrowcroft.github.io/accounting.js/) library to format our revenue numbers.
 
 First install the library to `vendor/assets/javascripts`:
 
@@ -280,6 +283,6 @@ And finally we can use this helper in our `orders.hbs` view:
 <p>Total Revenue: <b>{{numberToCurrency totalRevenue}}</b></p>
 ```
 
-Now that our numbers are formatted properly you can reload the page and see:
+Now that our numbers are formatted properly you can reload the page and see our final result for part 2:
 
 ![Currency Helpers](https://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-two/currency-helpers.png)
