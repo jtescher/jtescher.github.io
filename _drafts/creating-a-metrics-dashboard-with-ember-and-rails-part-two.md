@@ -75,8 +75,8 @@ If you reload the page you should now see this:
 ![Ember application template](https://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-two/ember-home-screen.png)
 
 
-Creating Dynamic Tables with Ember and Handlebars
--------------------------------------------------
+Creating Tables with Ember and Handlebars
+-----------------------------------------
 
 Often the simplest way to display some metrics data is to just put it all in a table. I find that it is often helpful
 when creating HTML with JavaScript to first start out with the final result and slowly add dynamic content in pieces.
@@ -143,4 +143,88 @@ Then we can add a link to this page in our `application.hbs` file:
 
 Then if you reload and follow the orders nav link you should see this:
 
-![Ember application template](https://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-two/orders-screen.png)
+![Static Orders](https://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-two/orders-screen.png)
+
+Creating Dynamic Tables
+-----------------------
+
+In Ember, a template typically retrieves information to display from a controller, and the controller is set up by its
+route. Let's make this table dynamic by assigning the data required to build it in the `OrdersRoute`
+
+``` coffeescript
+# app/assets/javascripts/routes/orders_route.js.coffee
+Dashboard.OrdersRoute = Ember.Route.extend({
+  model: ->
+    [
+      {
+        id: 1,
+        firstName: 'James',
+        lastName: 'Deen',
+        quantity: 1,
+        revenue: '10.00',
+      },
+      {
+        id: 2,
+        firstName: 'Alex',
+        lastName: 'Baldwin',
+        quantity: 2,
+        revenue: '20.00',
+      }
+    ]
+})
+
+```
+
+And then we set up the controller to process the totals in the `OrdersController`
+
+``` coffeescript
+# app/assets/javascripts/controllers/orders_controller.js.coffee
+Dashboard.OrdersController = Ember.ArrayController.extend({
+
+  totalQuantity: (->
+    @get('content').reduce(((previousValue, order) ->
+      previousValue + order.quantity
+    ), 0)
+  ).property('@each')
+
+  totalRevenue: (->
+    @get('content').reduce(((previousValue, order) ->
+      previousValue + parseFloat(order.revenue)
+    ), 0)
+  ).property('@each')
+
+})
+
+```
+
+And this lets us use the data provided by the controller in the template:
+
+``` handlebars
+<h1>Orders</h1>
+<table class='table table-striped'>
+  <tr>
+    <th>#</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Quantity</th>
+    <th>Revenue</th>
+  </tr>
+  {{#each}}
+  <tr>
+    <td>{{id}}</td>
+    <td>{{firstName}}</td>
+    <td>{{lastName}}</td>
+    <td>{{quantity}}</td>
+    <td>{{revenue}}</td>
+  </tr>
+  {{/each}}
+</table>
+
+<p>Total Quantity: <b>{{totalQuantity}}</b></p>
+<p>Total Revenue: <b>{{totalRevenue}}</b></p>
+
+```
+
+If you reload the page it should now look like this:
+
+![Dynamic Orders](https://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-two/dynamic-orders-screen.png)
