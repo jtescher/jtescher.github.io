@@ -7,7 +7,9 @@ categories: rails ember.js metrics
 
 *This is part two of a series on building a metrics dashboard with Ember, Bootstrap, and Rails. Over the next few weeks
 I will be building out more functionality and writing posts to cover that. If you haven't read
-[part one](/creating-a-metrics-dashboard-with-ember-and-rails-part-one) then go read that first.*
+[part one](/creating-a-metrics-dashboard-with-ember-and-rails-part-one) then that's a good place to start.* 
+
+*[View code from this post in Github](github.com/jtescher/example-ember-rails-dashboard)*
 
 In [part one](/creating-a-metrics-dashboard-with-ember-and-rails-part-one) we ended up with a Rails app that generated
 the Ember app that rendered our metrics page. If you followed along your page should now look like this:
@@ -80,9 +82,9 @@ If you reload the page you should now see this:
 Creating Tables with Ember and Handlebars
 -----------------------------------------
 
-Often the simplest way to display some metrics data is to just put it all in a table. I find that it is often helpful
+Often the simplest way to display metrics data is to just put it all in a table. I find that it is often helpful
 when creating HTML with JavaScript to first start out with the final result and slowly add dynamic content in pieces.
-Lets create an example of this to display some financial data about our sales process.
+Let's create an example of this to display some financial data about our sales process.
 
 Step one is to create the Ember route to get to this URL. Let's edit `app/assets/javascripts/router.js.coffee` and add it:
 
@@ -126,7 +128,7 @@ And we can then create an idea of what we want the page to look like by mocking 
 
 ```
 
-Then we can add a link to this page in our `application.hbs` file (the double link-to is an an annoying hack but
+Then we can add a link to this page in our `application.hbs` file (the double link-to is an annoying hack but
 explained [here](https://github.com/emberjs/ember.js/issues/4387)):
 ``` handlebars
 ...
@@ -236,7 +238,7 @@ Formatting Values With Helpers
 ------------------------------
 
 The image above looks pretty good but we seem to have lost our currency formatting. There are a few good libraries for
-formatting currencies in JavaScript and Ember makes it simple to access these libraries in your handlebars templates.
+formatting currencies in JavaScript, and Ember makes it simple to access these libraries in your handlebars templates.
 Let's add the [accounting.js](http://josscrowcroft.github.io/accounting.js/) library to format our revenue numbers.
 
 First install the library to `vendor/assets/javascripts`:
