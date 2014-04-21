@@ -9,8 +9,6 @@ categories: rails ember.js metrics
 I will be building out more functionality and writing posts to cover that. If you haven't read
 [part one](/creating-a-metrics-dashboard-with-ember-and-rails-part-one) then that's a good place to start.* 
 
-*[View code from this post in Github](github.com/jtescher/example-ember-rails-dashboard)*
-
 In [part one](/creating-a-metrics-dashboard-with-ember-and-rails-part-one) we ended up with a Rails app that generated
 the Ember app that rendered our metrics page. If you followed along your page should now look like this:
 
