@@ -149,7 +149,7 @@ Creating Dynamic Tables
 -----------------------
 
 In Ember, a template typically retrieves information to display from a controller, and the controller is set up by its
-route. Let's make this table dynamic by assigning the data required to build it in the `OrdersRoute`
+route. Let's make this table dynamic by assigning the data required to build it in the `OrdersRoute`.
 
 ``` coffeescript
 # app/assets/javascripts/routes/orders_route.js.coffee
@@ -175,7 +175,7 @@ Dashboard.OrdersRoute = Ember.Route.extend({
 
 ```
 
-And then we set up the controller to process the totals in the `OrdersController`
+And then we set up the controller to process the totals in the `OrdersController`.
 
 ``` coffeescript
 # app/assets/javascripts/controllers/orders_controller.js.coffee
@@ -228,3 +228,58 @@ And this lets us use the data provided by the controller in the template:
 If you reload the page it should now look like this:
 
 ![Dynamic Orders](https://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-two/dynamic-orders-screen.png)
+
+Formatting Values With Helpers
+------------------------------
+
+There are a few good libraries for formatting currencies in JavaScript and Ember makes it simple to access these
+libraries in your handlebars templates. Let's add the [accounting.js](http://josscrowcroft.github.io/accounting.js/)
+library to format our revenue numbers.
+
+First install the library to `vendor/assets/javascripts`:
+
+``` bash
+$ curl https://raw.github.com/josscrowcroft/accounting.js/master/accounting.js -o vendor/assets/javascripts/accounting-0.3.2.js
+```
+
+Then include it in your `application.js` file:
+
+``` javascript
+//= require jquery
+//= require accounting-0.3.2
+//= require_tree .
+
+```
+
+Then create a `currency_helpers.js.coffee` file to wrap the library.
+
+``` coffeescript
+# app/assets/javascripts/helpers/currency_helpers.js.coffee
+Ember.Handlebars.registerBoundHelper('numberToCurrency', (number) ->
+  accounting.formatMoney(number)
+)
+
+```
+
+And finally we can use this helper in our `orders.hbs` view:
+
+``` handlebars
+...
+{{#each}}
+  <tr>
+    <td>{{id}}</td>
+    <td>{{firstName}}</td>
+    <td>{{lastName}}</td>
+    <td>{{quantity}}</td>
+    <td>{{numberToCurrency revenue}}</td>
+  </tr>
+  {{/each}}
+</table>
+
+<p>Total Quantity: <b>{{totalQuantity}}</b></p>
+<p>Total Revenue: <b>{{numberToCurrency totalRevenue}}</b></p>
+```
+
+Now that our numbers are formatted properly you can reload the page and see:
+
+![Currency Helpers](https://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-two/currency-helpers.png)
