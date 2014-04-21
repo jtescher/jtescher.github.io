@@ -29,14 +29,15 @@ Preparing the application
 Before we add any more content let's update our Ember application template and add a basic structure with some
 navigation in `app/assets/javascripts/templates/application.hbs`.
 
-``` handlebars
+``` html
 <div class='container'>
 
   <header class='masthead'>
     <nav class='navbar navbar-default' role='navigation'>
       <div class='container-fluid'>
         <div class='navbar-header'>
-          <button type='button' class='navbar-toggle'data-toggle='collapse' data-target='#main-nav-collapse'>
+          <button type='button' class='navbar-toggle'
+              data-toggle='collapse' data-target='#main-nav-collapse'>
             <span class='sr-only'>Toggle navigation</span>
             <span class='icon-bar'></span>
             <span class='icon-bar'></span>
@@ -66,7 +67,7 @@ navigation in `app/assets/javascripts/templates/application.hbs`.
 
 And let's add an index template so we know when we're on the home page in `app/assets/javascripts/templates/index.hbs`.
 
-``` handlebars
+``` html
 <div class='jumbotron'>
   <h1>Hello from Ember.js!</h1>
   <p>Let's see some metrics.</p>
@@ -130,7 +131,8 @@ And we can then create an idea of what we want the page to look like by mocking 
 
 Then we can add a link to this page in our `application.hbs` file (the double link-to is an annoying hack but
 explained [here](https://github.com/emberjs/ember.js/issues/4387)):
-``` handlebars
+
+``` html
 ...
 <div class='collapse navbar-collapse' id='main-nav-collapse'>
   <ul class='nav navbar-nav'>
@@ -187,13 +189,13 @@ And then we set up the controller to process the totals in the `OrdersController
 Dashboard.OrdersController = Ember.ArrayController.extend({
 
   totalQuantity: (->
-    @get('content').reduce(((previousValue, order) ->
+    @reduce(((previousValue, order) ->
       previousValue + order.quantity
     ), 0)
   ).property('@each')
 
   totalRevenue: (->
-    @get('content').reduce(((previousValue, order) ->
+    @reduce(((previousValue, order) ->
       previousValue + parseFloat(order.revenue)
     ), 0)
   ).property('@each')
@@ -204,7 +206,7 @@ Dashboard.OrdersController = Ember.ArrayController.extend({
 
 And this lets us use the data provided by the controller in the template:
 
-``` handlebars
+``` html
 <h1>Orders</h1>
 <table class='table table-striped'>
   <tr>
@@ -268,7 +270,7 @@ Ember.Handlebars.registerBoundHelper('numberToCurrency', (number) ->
 
 And finally we can use this helper in our `orders.hbs` view:
 
-``` handlebars
+``` html
 ...
 {{#each}}
   <tr>
