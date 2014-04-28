@@ -7,7 +7,8 @@ categories: rails ember.js metrics
 
 *This is part two of a series on building a metrics dashboard with Ember, Bootstrap, and Rails. Over the next few weeks
 I will be building out more functionality and writing posts to cover that. If you haven't read
-[part one](/creating-a-metrics-dashboard-with-ember-and-rails-part-one) then that's a good place to start.* 
+[part one](/creating-a-metrics-dashboard-with-ember-and-rails-part-one) then that's a good place to start. You can find
+part three [here](/creating-a-metrics-dashboard-with-ember-and-rails-part-three) when you are finished.*
 
 In [part one](/creating-a-metrics-dashboard-with-ember-and-rails-part-one) we ended up with a Rails app that generated
 the Ember app that rendered our metrics page. If you followed along your page should now look like this:
@@ -288,3 +289,6 @@ And finally we can use this helper in our `orders.hbs` view:
 Now that our numbers are formatted properly you can reload the page and see our final result for part 2:
 
 ![Currency Helpers](https://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-two/currency-helpers.png)
+
+You can now go on to [part three](/creating-a-metrics-dashboard-with-ember-and-rails-part-three) and start adding some
+charts!
