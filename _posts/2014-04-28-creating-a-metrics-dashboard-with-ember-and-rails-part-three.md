@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Creating A Metrics Dashboard With Ember.js, Bootstrap, and Rails - Part 3"
-date:
+date:   2014-04-28 09:00:00
 categories: rails ember.js metrics
 ---
 
