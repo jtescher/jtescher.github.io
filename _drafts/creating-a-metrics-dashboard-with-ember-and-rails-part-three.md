@@ -24,7 +24,7 @@ Remember, if you get stuck you can find all of the code for this post at
 Choosing The Right Library
 --------------------------
 
-[![Highcharts Demo](/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-three/highcharts-demo.png)](http://www.highcharts.com/demo/combo/)
+[![Highcharts Demo](http://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-three/highcharts-demo.png)](http://www.highcharts.com/demo/combo/)
 
 There are many good options when it comes to JavaScript graphing, charting, and visualizations. I find
 [highcharts](http://www.highcharts.com/) to be a good place to get started and they are free for non-commercial uses!
@@ -118,7 +118,7 @@ Dashboard.ColumnChartComponent = Ember.Component.extend
 
 Then when you reload the page it should look like this:
 
-![Orders Static Column Chart](/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-three/orders-static-column-chart.png)
+![Orders Static Column Chart](http://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-three/orders-static-column-chart.png)
 
 
 Binding Data To The Ember Component
@@ -216,4 +216,4 @@ didInsertElement: ->
 ```
 
 We then end up with our final dynamic chart rendered by Ember:
-![Orders Static Column Chart](/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-three/orders-dynamic-column-chart.png)
+![Orders Static Column Chart](http://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-three/orders-dynamic-column-chart.png)
