@@ -138,3 +138,6 @@ Then we can move the html generation to ember by placing it in the top level `ap
 And the end of part one should be rendered by Ember looking like this:
 
 ![Final](https://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-one/ember-home-screen.png)
+
+You can now go on to [part two](/creating-a-metrics-dashboard-with-ember-and-rails-part-two) and start building dynamic
+tables!
