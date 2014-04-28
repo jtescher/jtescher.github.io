@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Creating A Metrics Dashboard With Ember.js, Bootstrap, and Rails - Part 3"
-date: 2014-08-25 09:00:00
+date:
 categories: rails ember.js metrics
 ---
 
@@ -104,10 +104,10 @@ Dashboard.ColumnChartComponent = Ember.Component.extend
       },
       series: [{
         name: 'Quantity',
-        data: [1, 2]
+        data: [4, 4]
       }, {
         name: 'Revenue',
-        data: [10.0, 20.0]
+        data: [10.0, 10.0]
       }]
     })
 
@@ -119,3 +119,101 @@ Dashboard.ColumnChartComponent = Ember.Component.extend
 Then when you reload the page it should look like this:
 
 ![Orders Static Column Chart](/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-three/orders-static-column-chart.png)
+
+
+Binding Data To The Ember Component
+-----------------------------------
+
+The chart we have is currently always showing the same series because we hard coded it in the component. Let's now make
+this dynamic by adding the data in the route and using data bindings.
+
+First let's update the data in our orders route to include a product id.
+
+```coffeescript
+# app/assets/javascripts/routes/orders_route.js.coffee
+Dashboard.OrdersRoute = Ember.Route.extend({
+  model: ->
+    [
+      {
+        id: 1,
+        firstName: 'James',
+        lastName: 'Deen',
+        quantity: 1,
+        revenue: '10.00',
+        productId: 0,
+      },
+      {
+        id: 2,
+        firstName: 'Alex',
+        lastName: 'Baldwin',
+        quantity: 2,
+        revenue: '20.00',
+        productId: 1,
+      }
+    ]
+})
+
+```
+
+And then we can build our chart series in the orders controller (very naive example):
+
+```coffeescript
+Dashboard.OrdersController = Ember.ArrayController.extend({
+
+  ...
+
+  chartSeries: (->
+    revenues = @map((order)->
+      parseFloat(order.revenue)
+    )
+    quantities = @mapBy('quantity')
+
+    [
+      {
+        name: 'Quantity',
+        data: quantities
+      },
+      {
+        name: 'Revenue',
+        data: revenues
+      }
+    ]
+  ).property('@each')
+
+})
+
+
+```
+
+We can then bind `chartSeries` in `orders.hbs`:
+
+```html
+<h1>Orders</h1>
+
+{{column-chart chartId='revenue-by-product' series=chartSeries}}
+
+<table class='table table-striped'>
+```
+
+And finally use series in our chart component:
+
+```coffeescript
+# app/assets/javascripts/components/column-chart.js.coffee
+...
+didInsertElement: ->
+  $("##{@chartId}").highcharts({
+    chart: { type: 'column' },
+    title: { text: 'Revenue by Product' },
+    legend: { enabled: false },
+    xAxis: {
+      title: {
+        text: 'Product Number'
+      }
+    },
+    series: @series
+  })
+...
+```
+
+We then end up with our final dynamic chart rendered by Ember:
+![Orders Static Column Chart](/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-three/orders-dynamic-column-chart.png)
