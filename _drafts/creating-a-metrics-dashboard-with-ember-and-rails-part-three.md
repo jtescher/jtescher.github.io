@@ -11,7 +11,7 @@ I will be building out more functionality and writing posts to cover that. If yo
 [part two](/creating-a-metrics-dashboard-with-ember-and-rails-part-two) then that's a good place to start.*
 
 In [part two](/creating-a-metrics-dashboard-with-ember-and-rails-part-two) we ended up with an Ember app that rendered
-dynamic tables. If you followed along your page should now look like this:
+dynamic tables. If you followed along, your page should now look like this:
 
 ![Part Two Final](https://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-two/currency-helpers.png)
 
@@ -155,7 +155,7 @@ Dashboard.OrdersRoute = Ember.Route.extend({
 
 ```
 
-And then we can build our chart series in the orders controller (very naive example):
+And then we can build our chart series in the orders controller (this is a very simplistic example):
 
 ```coffeescript
 Dashboard.OrdersController = Ember.ArrayController.extend({
