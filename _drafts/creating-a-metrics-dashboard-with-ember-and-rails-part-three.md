@@ -27,7 +27,7 @@ Choosing The Right Library
 [![Highcharts Demo](http://jtescher.github.io/assets/creating-a-metrics-dashboard-with-ember-and-rails-part-three/highcharts-demo.png)](http://www.highcharts.com/demo/combo/)
 
 There are many good options when it comes to JavaScript graphing, charting, and visualizations. I find
-[highcharts](http://www.highcharts.com/) to be a good place to get started and they are free for non-commercial uses!
+[highcharts](http://www.highcharts.com/) to be a good place to get started and it is free for non-commercial uses!
 If you find yourself needing more control or having a very specific requirement you can always look at projects like
 [d3.js](http://d3js.org/).
 
