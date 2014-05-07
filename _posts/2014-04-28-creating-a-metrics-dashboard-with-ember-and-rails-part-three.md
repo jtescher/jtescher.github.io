@@ -112,7 +112,7 @@ Dashboard.ColumnChartComponent = Ember.Component.extend
     })
 
   willDestroyElement: ->
-    $("##{@chartId}").remove()
+    $("##{@chartId}").highcharts().destroy()
 
 ```
 
