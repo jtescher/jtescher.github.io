@@ -1,6 +1,6 @@
 name: Blog
 markdown: redcarpet
-pygments: true
+highlighter: pygments
 
 permalink: /:title/
 title: Julian Tescher Does The Internet
