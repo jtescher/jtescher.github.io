@@ -60,3 +60,38 @@ Go to /@tests to run the tests.
 Now you can go to [localhost:9000](http://localhost:9000/) and you should see the welcome page.
 
 ![Revel Welcome Page](https://jtescher.github.io/assets/building-a-go-web-app-with-revel-on-heroku/revel-welcome.png)
+
+
+Serving Content From Revel
+--------------------------
+
+Revel has an easily understood MVC structure and ships with bootstrap by default. You can read more about the flow of
+control through a Revel app in their excellent [core concepts](http://revel.github.io/manual/concepts.html)
+documentation, but for now let's just render some custom content by adjusting the `App/index.html` view. Revel uses Go's
+built in templating for html rendering.
+
+```html
+<!-- app/views/App/index.html -->
+{{set . "title" "Home"}}
+{{template "header.html" .}}
+
+<div class="container">
+  <div class="hero-unit">
+    <h1>Hello from Revel!</h1>
+    <p>Creating html pages is very straightforward.</p>
+    <p><a class="btn btn-primary btn-large" role="button">Magic</a></p>
+  </div>
+
+  <div class="row">
+    <div class="span6">
+      {{template "flash.html" .}}
+    </div>
+  </div>
+</div>
+
+{{template "footer.html" .}}
+```
+
+And if you reload the page you should see your changes.
+
+![Custom Revel Content](https://jtescher.github.io/assets/building-a-go-web-app-with-revel-on-heroku/custom-revel-content.png)
