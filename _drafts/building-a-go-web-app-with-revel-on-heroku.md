@@ -95,3 +95,29 @@ built in templating for html rendering.
 And if you reload the page you should see your changes.
 
 ![Custom Revel Content](https://jtescher.github.io/assets/building-a-go-web-app-with-revel-on-heroku/custom-revel-content.png)
+
+
+Deploying The App
+-----------------
+
+Deploying a Revel app to Heroku is quite simple. First we create a `.godir` file at the root of our project with the
+path to the project in it.
+
+```bash
+$ echo "github.com/jtescher/blog" > .godir
+```
+
+Then we can create the app on Heroku using a buildpack.
+
+```bash
+$ heroku create -b https://github.com/robfig/heroku-buildpack-go-revel.git
+```
+
+And finally we can push our app to Heroku.
+
+```bash
+$ git push heroku
+$ heroku open
+```
+
+And that's it! Your Revel app should now be live.
