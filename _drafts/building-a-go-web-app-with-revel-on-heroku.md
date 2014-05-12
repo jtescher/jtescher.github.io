@@ -28,7 +28,7 @@ Creating a Revel App
 Revel is a high-productivity web framework for the Go language. It has an impressive feature set and is much more in
 line with the rails "convention over configuration" approach than most other go web frameworks.
 
-To get the project started, first install Revel into your $GOPATH:
+To get the project started, first install Revel into your `$GOPATH`:
 
 ```bash
 $ go get github.com/revel/cmd/revel
@@ -68,7 +68,7 @@ Serving Content From Revel
 Revel has an easily understood MVC structure and ships with bootstrap by default. You can read more about the flow of
 control through a Revel app in their excellent [core concepts](http://revel.github.io/manual/concepts.html)
 documentation, but for now let's just render some custom content by adjusting the `App/index.html` view. Revel uses Go's
-built in templating for html rendering.
+built in templating for HTML rendering.
 
 ```html
 <!-- app/views/App/index.html -->
