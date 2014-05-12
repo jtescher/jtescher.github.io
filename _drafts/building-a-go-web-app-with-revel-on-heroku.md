@@ -7,7 +7,7 @@ categories: go golang revel heroku
 
 I've been interested in Go for a long time now. The language has lots of aspects that make it well suited for building
 modern web applications including its powerful [standard library](http://golang.org/pkg/), concurrency primitives, and
-impressive [performance benchmarks](http://www.techempower.com/benchmarks). The community is also gaining lots of
+impressive [performance benchmarks](http://www.techempower.com/benchmarks). The community is also gaining a lot of
 ground in terms of tooling, web frameworks, and other resources for creating sites in Go.
 
 In this post I will show you how to create a basic app in Go and how to host it on [Heroku](https://www.heroku.com/).
@@ -26,7 +26,7 @@ Creating a Revel App
 [![Revel Logo](https://jtescher.github.io/assets/building-a-go-web-app-with-revel-on-heroku/revel-logo.png)](http://revel.github.io/)
 
 Revel is a high-productivity web framework for the Go language. It has an impressive feature set and is much more in
-line with the rails "convention over configuration" approach than most other go web frameworks.
+line with the rails "convention over configuration" approach than most other Go web frameworks.
 
 To get the project started, first install Revel into your `$GOPATH`:
 
