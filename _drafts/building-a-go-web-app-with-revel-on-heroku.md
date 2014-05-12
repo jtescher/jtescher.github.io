@@ -78,8 +78,8 @@ built in templating for html rendering.
 <div class="container">
   <div class="hero-unit">
     <h1>Hello from Revel!</h1>
-    <p>Creating html pages is very straightforward.</p>
-    <p><a class="btn btn-primary btn-large" role="button">Magic</a></p>
+    <p>Creating HTML pages is very straightforward.</p>
+    <p><a class="btn btn-primary btn-large" role="button">Awesome</a></p>
   </div>
 
   <div class="row">
