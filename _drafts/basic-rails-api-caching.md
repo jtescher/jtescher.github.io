@@ -93,8 +93,8 @@ Last-Modified: Mon, 27 May 2014 09:00:00 GMT
 ...
 ```
 
-This method still requites a request to be made to the Rails app, and the product still has to be pulled from the 
-database to determine the `created_at` time. However rendering the response body can be a substantial portion of
+This method still requires a request to be made to the Rails app, and the product still has to be pulled from the 
+database to determine the `created_at` time. However, rendering the response body can be a substantial portion of
 each server response so this is a simple way to save a lot of time.
 
 These options are only the beginning of the caching options Rails offers. As of Rails 4 
