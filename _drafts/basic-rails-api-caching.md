@@ -10,7 +10,8 @@ your application grows in popularity you will inevitably be faced with the decis
 your existing servers more efficiently. Complex caching strategies can be incredibly difficult to implement correctly,
 but simple caching layers can go a long way.
 
-In this post I'll explain some of the basic rails caching mechanisms and explain some of the costs and benefits of each.
+In this post I'll explain two basic rails caching mechanisms and explain some of the costs and benefits of each.
+
 
 HTTP Caching
 ------------
@@ -41,12 +42,13 @@ will not be seen for up to one minute (or whichever time you have chosen).
 Conditional GET
 ---------------
 
-Another option is using etags to know what version of the resource the client has last seen and returning a HTTP 
-`304 Not Modified` response if the resource has not changed.
+Another option is using Etags or Last-Modified times to know what version of the resource the client has last seen and 
+returning a HTTP `304 Not Modified` response with no content if the resource has not changed.
 
 To set this up in a controller you can either use the
 [fresh_when](http://api.rubyonrails.org/classes/ActionController/ConditionalGet.html#method-i-fresh_when) or 
-[stale?] methods. Here is an example using the `fresh_when` method.
+[stale?](http://api.rubyonrails.org/classes/ActionController/ConditionalGet.html#method-i-stale-3F) methods. Here is an 
+example using the `fresh_when` method.
 
 ```ruby
 class ProductsController < ApplicationController
@@ -57,20 +59,40 @@ class ProductsController < ApplicationController
 end
 ```
 
-Rails will automatically attach an `ETag` header to every response. In this case it is based on the product and 
-product's `created_at` timestamp. Now if you make a request for a given product you will see the etag in the headers:
+This method attaches an `ETag` header and a `Last-Modified` header to every product response. Now if you make a request 
+for a given product you will see the headers in the response:
 
 ```bash
-curl -I localhost:3000/products/1
-...
+curl -i localhost:3000/products/1
+HTTP/1.1 200 OK
 ETag: "91206795ac4c5cd1b02d8fcbc752b97a"
-..
+Last-Modified: Mon, 27 May 2014 09:00:00 GMT
+...
 ```
 
-And if you make the same request but include the etag in a `If None Match` header, the server can return 304 and save 
-all the time it would have spent rendering the content again.
+And if you make the same request but include the etag in a `If-None-Match` header, the server can return 304 with empty
+content and save all the time it would have spent rendering the content.
  
 ```bash
-curl localhost:3000/products/1.json -i --header 'If-None-Match: "91206795ac4c5cd1b02d8fcbc752b97a"'
-HTTP/1.1 304 Not Modified  
+curl -i localhost:3000/products/1.json \
+  --header 'If-None-Match: "91206795ac4c5cd1b02d8fcbc752b97a"'
+HTTP/1.1 304 Not Modified
+Etag: "91206795ac4c5cd1b02d8fcbc752b97a"
+Last-Modified: Mon, 27 May 2014 09:00:00 GMT
+...
 ```
+
+The other option is to use the `If-Modified-Since` header in the request, which will have the same result:
+
+```bash
+curl -i localhost:3000/products/1.json \
+  --header 'If-Modified-Since: Mon, 27 May 2014 09:00:00 GMT'
+HTTP/1.1 304 Not Modified
+Etag: "91206795ac4c5cd1b02d8fcbc752b97a"
+Last-Modified: Mon, 27 May 2014 09:00:00 GMT
+...
+```
+
+This method still requites a request to be made to the Rails app, and the product still has to be pulled from the 
+database to determine the `created_at` time. However rendering the response can be a substantial portion of
+each request so this is a simple way to save a lot of time.
