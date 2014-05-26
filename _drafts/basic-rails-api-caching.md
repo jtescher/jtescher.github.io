@@ -1,0 +1,76 @@
+---
+layout: post
+title:  "Basic Rails API Caching"
+date:   2014-05-26 09:00:00
+categories: rails api caching
+---
+
+Rails performance out of the box is acceptable for prototypes and small applications with limited traffic. However as 
+your application grows in popularity you will inevitably be faced with the decision to either add more servers, or use
+your existing servers more efficiently. Complex caching strategies can be incredibly difficult to implement correctly,
+but simple caching layers can go a long way.
+
+In this post I'll explain some of the basic rails caching mechanisms and explain some of the costs and benefits of each.
+
+HTTP Caching
+------------
+
+If your API responses are mostly static content like a list of available products, then 
+[HTTP Caching](http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html) can be a very effective solution. Even something
+as low as a one minute cache can move the vast majority of your requests to a CDN or an in-memory store like 
+[rack cache](http://rtomayko.github.io/rack-cache/).
+
+Specifying the expiration time is simple. In your controller action just call `expires_in` with the time:
+
+```ruby
+class ProductsController < ApplicationController
+  def index
+    expires_in 1.minute, public: true
+    @products = Product.all
+  end
+end
+```
+
+This will result in a header being set to `Cache-Control: max-age=60, public` which any CDN will pick up and serve for
+you instead of the request hitting your server.
+
+This solution works well when the content is mostly static but it comes with the downside that changes to your content
+will not be seen for up to one minute (or whichever time you have chosen).
+
+
+Conditional GET
+---------------
+
+Another option is using etags to know what version of the resource the client has last seen and returning a HTTP 
+`304 Not Modified` response if the resource has not changed.
+
+To set this up in a controller you can either use the
+[fresh_when](http://api.rubyonrails.org/classes/ActionController/ConditionalGet.html#method-i-fresh_when) or 
+[stale?] methods. Here is an example using the `fresh_when` method.
+
+```ruby
+class ProductsController < ApplicationController
+  def show
+    @product = Product.find(params[:id])
+    fresh_when(etag: @product, last_modified: @product.created_at, public: true)
+  end
+end
+```
+
+Rails will automatically attach an `ETag` header to every response. In this case it is based on the product and 
+product's `created_at` timestamp. Now if you make a request for a given product you will see the etag in the headers:
+
+```bash
+curl -I localhost:3000/products/1
+...
+ETag: "91206795ac4c5cd1b02d8fcbc752b97a"
+..
+```
+
+And if you make the same request but include the etag in a `If None Match` header, the server can return 304 and save 
+all the time it would have spent rendering the content again.
+ 
+```bash
+curl localhost:3000/products/1.json -i --header 'If-None-Match: "91206795ac4c5cd1b02d8fcbc752b97a"'
+HTTP/1.1 304 Not Modified  
+```
