@@ -10,7 +10,7 @@ your application grows in popularity you will inevitably be faced with the decis
 your existing servers more efficiently. Complex caching strategies can be incredibly difficult to implement correctly,
 but simple caching layers can go a long way.
 
-In this post I'll explain two basic rails caching mechanisms and explain some of the costs and benefits of each.
+In this post I'll explain two basic Rails caching mechanisms and explain some of the costs and benefits of each.
 
 
 HTTP Caching
@@ -94,10 +94,10 @@ Last-Modified: Mon, 27 May 2014 09:00:00 GMT
 ```
 
 This method still requites a request to be made to the Rails app, and the product still has to be pulled from the 
-database to determine the `created_at` time. However rendering the response can be a substantial portion of
-each request so this is a simple way to save a lot of time.
+database to determine the `created_at` time. However rendering the response body can be a substantial portion of
+each server response so this is a simple way to save a lot of time.
 
-These options are only the beginning of the caching options rails offers. As of rails 4 
+These options are only the beginning of the caching options Rails offers. As of Rails 4 
 [page caching](https://github.com/rails/actionpack-page_caching) as well as 
 [action caching](https://github.com/rails/actionpack-action_caching) have been pulled out into their own gems and are 
 worth looking at if you need those options.
