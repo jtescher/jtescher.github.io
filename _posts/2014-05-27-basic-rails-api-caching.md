@@ -64,7 +64,7 @@ This method attaches an `ETag` header and a `Last-Modified` header to every prod
 for a given product you will see the headers in the response:
 
 ```bash
-curl -i localhost:3000/products/1
+curl -i localhost:3000/products/1.json
 HTTP/1.1 200 OK
 ETag: "91206795ac4c5cd1b02d8fcbc752b97a"
 Last-Modified: Mon, 27 May 2014 09:00:00 GMT
