@@ -18,7 +18,8 @@ HTTP Caching
 
 If your API responses are mostly static content like a list of available products, then 
 [HTTP Caching](http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html) can be a very effective solution. Even something
-as low as a one minute cache can move the vast majority of your requests to a CDN or an in-memory store like 
+as low as a one minute cache can move the vast majority of your requests to a CDN like
+[CloudFlare](https://www.cloudflare.com/) or an in-memory store like
 [rack cache](http://rtomayko.github.io/rack-cache/).
 
 Specifying the expiration time is simple. In your controller action just call `expires_in` with the time:
