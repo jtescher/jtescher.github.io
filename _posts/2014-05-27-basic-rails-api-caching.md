@@ -98,7 +98,7 @@ This method still requires a request to be made to the Rails app, and the produc
 database to determine the `created_at` time. However, rendering the response body can be a substantial portion of
 each server response so this is a simple way to save a lot of time.
 
-These options are only the beginning of the caching options Rails offers. As of Rails 4 
+These examples are only the beginning of the caching options Rails offers. As of Rails 4
 [page caching](https://github.com/rails/actionpack-page_caching) as well as 
 [action caching](https://github.com/rails/actionpack-action_caching) have been pulled out into their own gems and are 
 worth looking at if you need those options.
