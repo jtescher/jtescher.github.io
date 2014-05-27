@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Basic Rails API Caching"
-date:   2014-05-26 09:00:00
+date:   2014-05-27 09:00:00
 categories: rails api caching
 ---
 
