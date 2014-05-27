@@ -43,7 +43,7 @@ will not be seen for up to one minute (or whichever time you have chosen).
 Conditional GET
 ---------------
 
-Another option is using Etags or Last-Modified times to know what version of the resource the client has last seen and 
+Another option is using ETags or Last-Modified times to know what version of the resource the client has last seen and
 returning a HTTP `304 Not Modified` response with no content if the resource has not changed.
 
 To set this up in a controller you can either use the
@@ -71,7 +71,7 @@ Last-Modified: Mon, 27 May 2014 09:00:00 GMT
 ...
 ```
 
-And if you make the same request but include the etag in a `If-None-Match` header, the server can return 304 with empty
+And if you make the same request but include the ETag in a `If-None-Match` header, the server can return 304 with empty
 content and save all the time it would have spent rendering the content.
  
 ```bash
