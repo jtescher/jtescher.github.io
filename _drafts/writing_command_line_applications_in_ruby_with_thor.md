@@ -16,11 +16,15 @@ moving up to using the [Thor gem](https://github.com/erikhuda/thor). Even though
 it can be used to build quite powerful and expressive projects like the [Twitter CLI](https://github.com/sferik/t) and 
 the Rails CLI.
 
+I'm going to use a simple calculator with just add and subtract functions as examples but they are just placeholders for
+whatever work you want to do. I'll show how this functionality can be implemented in three versions: a simple inline 
+version, a more complicated version with command line options, and finally a version that uses Thor.
+
 
 Starting Small: Inline scripts
 ------------------------------
 
-CLARIFY :::: To get started, we want to be able to add a group of numbers and subtract a group of numbers. This is so simple that it
+To get started, we want to be able to add a group of numbers and subtract a group of numbers. This is so simple that it
 can be expressed as a one line Ruby script and evaluated directly. The `ruby` command lets you pass in arbitrary Ruby 
 code that can be executed with the `-e` flag. The simplest version of our program then would be to add numbers
 in Ruby and use `puts` to print out the results:
