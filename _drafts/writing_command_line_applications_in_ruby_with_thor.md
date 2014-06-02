@@ -8,11 +8,11 @@ categories:
 Writing small command line utilities and bash scripts can save you a lot of time as a developer. People often don't take 
 advantage of them though because they feel intimidated and confused by the ones they use every day like `$ git status` 
 or `$ rails new` and it seems like there is just too much to learn. While it's true that some utilities are pretty 
-complicated, writing simple scripts is fairly painless and can help you a lot on repetitive tasks or using an
+complicated, writing simple scripts is fairly painless and can help you greatly with repetitive tasks or when using an
 application that doesn't need a graphical interface. 
  
-In this post I'll show you how to create simple calculator app/utility starting from in-line shell scripts in ruby and 
-moving up to using the [thor gem](https://github.com/erikhuda/thor). Even though my examples with Thor are pretty simple,
+In this post I'll show you how to create a simple calculator app/utility starting from in-line shell scripts in ruby and 
+moving up to using the [Thor gem](https://github.com/erikhuda/thor). Even though my examples with Thor are pretty simple,
 it can be used to build quite powerful and expressive projects like the [Twitter CLI](https://github.com/sferik/t) and 
 the Rails CLI.
 
@@ -20,7 +20,7 @@ the Rails CLI.
 Starting Small: Inline scripts
 ------------------------------
 
-To get started, we want to be able to add a group of numbers and subtract a group of numbers. This is so simple that it
+CLARIFY :::: To get started, we want to be able to add a group of numbers and subtract a group of numbers. This is so simple that it
 can be expressed as a one line Ruby script and evaluated directly. The `ruby` command lets you pass in arbitrary Ruby 
 code that can be executed with the `-e` flag. The simplest version of our program then would be to add numbers
 in Ruby and use `puts` to print out the results:
