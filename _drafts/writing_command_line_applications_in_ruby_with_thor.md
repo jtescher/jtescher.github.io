@@ -12,7 +12,7 @@ complicated, writing simple scripts is fairly painless and can help you a lot on
 application that doesn't need a graphical interface. 
  
 In this post I'll show you how to create simple calculator app/utility starting from in-line shell scripts in ruby and 
-moving up to using the [thor gem](https://github.com/erikhuda/thor). Even though my examples with thor are pretty simple,
+moving up to using the [thor gem](https://github.com/erikhuda/thor). Even though my examples with Thor are pretty simple,
 it can be used to build quite powerful and expressive projects like the [Twitter CLI](https://github.com/sferik/t) and 
 the Rails CLI.
 
@@ -22,7 +22,7 @@ Starting Small: Inline scripts
 
 To get started, we want to be able to add a group of numbers and subtract a group of numbers. This is so simple that it
 can be expressed as a one line Ruby script and evaluated directly. The `ruby` command lets you pass in arbitrary Ruby 
-code hat can be executed with the `-e` flag. The simplest version of our program then would be to simply add numbers
+code that can be executed with the `-e` flag. The simplest version of our program then would be to add numbers
 in Ruby and use `puts` to print out the results:
 
 ```bash
@@ -39,7 +39,7 @@ $ ruby -e "puts 11 - 6"
 ```
 
 That's pretty simple. If your needs can be fulfilled with that then there is no need to go on. But most requirements are
-not that simple. If you want to be able to let someone who does not understand Ruby use this then you want a simpler, 
+not that basic. If you want to be able to let someone who does not understand Ruby use this then you want a simpler, 
 more well-defined interface for them to use.
 
 
@@ -74,7 +74,7 @@ send(ARGV.shift, ARGV) if ARGV.length
 ```
 
 The two functions first convert the user input from strings, and then either sum with "+" or take the difference with 
-"-". The last line grabs the first argument as the method to use and the rest of the arguments as the inputs.
+"-". The last line grabs the first argument as the name of the method to use and the rest of the arguments as the inputs.
 
 Then you can execute this application passing in the arguments with:
 
@@ -91,7 +91,7 @@ $ ./calculator subtract 10 6
 This is still a very simple example, but you can see how this technique could be used to encapsulate more complicated 
 ideas into scripts with cleaner interfaces.
 
-However, once you want to package your application for others to use, or develop lots of complicated options that need 
+However, once you want to package your application for others to use or develop lots of complicated options that need 
 explaining and option parsing this can get messy and repetitive. I've found that the best way to create powerful and 
 well documented applications and utilities in Ruby is to use Thor.
 
@@ -106,7 +106,7 @@ this. Here is how it is described by the creators:
 > parsing command line options, writing "USAGE:" banners, and can also be used as an alternative to the Rake build tool. 
 > The syntax is Rake-like, so it should be familiar to most Rake users.
 
-You can install thor with `gem install thor`, and then replace your `calculator` file with:
+You can install Thor with `gem install thor`, and then replace your `calculator` file with:
 
 ```ruby
 #!/usr/bin/env ruby
@@ -153,4 +153,4 @@ $ ./calculator add 1 2 3
 
 It is as simple as that. Thor gives you the power to create well documented and full-featured utilities simply and 
 quickly. If you want to know more about Thor and all of it's fancy features like sub commands you can go on to read the 
-helpful [whatisthor](http://whatisthor.com/) site.
+helpful [whatisthor.com](http://whatisthor.com/) site.
