@@ -27,7 +27,8 @@ Adding Complexity: Command Line Options
 ---------------------------------------
 
 When your application moves beyond what a one line script can accomplish, you can save your methods to a `calculator`
-file and pass your arguments in as command line options.
+file and pass your arguments in as command line options. Remember to make your file executable with 
+`$ chmod +x calculator`
 
 In ruby all command line options are available to scripts as `ARGV`. 
 
@@ -76,3 +77,47 @@ this. Here is how it is described by the creators:
 > parsing command line options, writing "USAGE:" banners, and can also be used as an alternative to the Rake build tool. 
 > The syntax is Rake-like, so it should be familiar to most Rake users.
 
+You can install thor with `gem install thor`, and then replace your `calculator` file with
+
+```ruby
+#!/usr/bin/env ruby
+
+require 'thor'
+ 
+class Calculator < Thor
+  
+  desc "add ...ARGS", "Add all numbers in ARGS"
+  def add(*args)
+    say args.map(&:to_f).inject(:+)
+  end
+  
+  desc "subtract ...ARGS", "Subtract all numbers in ARGS"
+  def subtract(*args)
+    say args.map(&:to_f).inject(:-)
+  end
+  
+end
+ 
+Calculator.start(ARGV)
+```
+
+Thor will build the output for you, so to list options, you can pass no arguments:
+
+```bash
+$ ./calculator
+Commands:
+  calculator add ...ARGS       # Add all numbers in ARGS
+  calculator help [COMMAND]    # Describe available commands or one specific command
+  calculator subtract ...ARGS  # Subtract all numbers in ARGS
+
+```
+
+And you can pass in arguments as usual:
+
+```bash
+$ ./calculator add 1 2 3
+6.0
+```
+
+It is as simple as that. Thor gives you the power to create well documented and full-featured utilities simply and 
+quickly.
