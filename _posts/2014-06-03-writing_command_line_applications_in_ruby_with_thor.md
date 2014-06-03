@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Writing Command Line Applications In Ruby With Thor"
-date:   1970-01-01 00:00:00
+date:   2014-06-03 09:00:00
 categories:
 ---
 
