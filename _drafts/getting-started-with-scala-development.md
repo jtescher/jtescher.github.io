@@ -38,6 +38,7 @@ scala>
 ```
 
 Here you can evaluate simple expressions and quickly try a few things.
+(enter :quit to exit the REPL)
 
 ```bash
 scala> println("Hello world")
