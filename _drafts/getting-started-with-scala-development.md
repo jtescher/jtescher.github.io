@@ -7,7 +7,7 @@ categories: Scala languages
 
 ![Scala Logo](https://jtescher.github.io/assets/getting-started-with-scala-development/scala-logo.png)
 
-Learning new languages can be a great way to expand your skills and keep up to date with software development 
+Learning new languages can be a great way to expand your skills and stay up to date with software development 
 trends. The language that I'm currently learning is Scala! It's a great language for picking up functional programming 
 concepts and being on the JVM allows you to leverage the Java ecosystem's libraries and frameworks. In this post I'll 
 show you how to install Scala and give you a few resources to get you started.
@@ -58,6 +58,9 @@ programming styles.
 * The [Principles of Reactive Programming](https://www.coursera.org/course/reactive) course which is also taught by 
 Martin and goes into a lot of ways to create composable software that is event-driven, scalable under load, resilient 
 and responsive in the presence of failures
+
+* The books [Programming in Scala](http://www.artima.com/shop/programming_in_scala_2ed) and [Scala in Action]
+(http://www.manning.com/raychaudhuri/) which cover the language features in depth.
 
 * Also [Kojo](http://www.kogics.net/sf:kojo) which is an interesting interactive learning environment.
 
