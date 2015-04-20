@@ -8,9 +8,9 @@ categories: rails postgresql postgres aws elastic beanstalk
 ![AWS Elastic Beanstalk]
 (https://jtescher.github.io/assets/how-to-set-up-a-rails-4-2-app-on-aws-with-elastic-beanstalk-and-postgresql/aws-logo.png)
 
-_I previously posted instructions a year ago about [how to do this in rails 4.1]
+*I previously posted instructions a year ago about [how to do this in rails 4.1]
 (http://jtescher.github.io/how-to-set-up-a-rails-4-1-app-on-aws-with-elastic-beanstalk-and-postgresql/) on an old 
-version of Elastic Beanstalk. This is the updated version._
+version of Elastic Beanstalk. This is the updated version.*
 
 Deploying Rails apps can be tricky. For simple projects, tools like [Heroku](https://www.heroku.com/) can be perfect. 
 It's great for prototyping apps and testing out different ideas without a lot of hassle. However, when your project gets more 
