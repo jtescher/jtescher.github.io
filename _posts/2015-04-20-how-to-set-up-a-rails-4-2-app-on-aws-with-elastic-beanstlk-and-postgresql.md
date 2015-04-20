@@ -36,8 +36,8 @@ If you get stuck or have other issues the
 [documentation for Elastic Beanstalk](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html) is pretty good.
 
 ## Getting Started
-Sign up for an AWS account via the instructions at
-[Elastic Beanstock](https://console.aws.amazon.com/elasticbeanstalk/) and then download the
+Sign up for an AWS account via the instructions at the
+[AWS Console](https://console.aws.amazon.com/elasticbeanstalk/) and then download the
 Elastic Beanstalk Command Line Tools via Homebrew (or
 [here](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-getting-set-up.html#eb_cli3-install-with-pip) for PC).
 
