@@ -18,7 +18,7 @@ complicated and you want to have more control of your servers, load balancers, w
 you will not have the flexibility you desire.
 
 There are many services that provide the ability to get a Rails app up and running quickly while still keeping full
-control of your infrastructure, and one reasonable option is Amazon's
+control of your infrastructure and one reasonable option is Amazon's
 [Elastic Beanstalk](http://aws.amazon.com/elasticbeanstalk/). The service is aptly described by Amazon as follows:
 
 > AWS Elastic Beanstalk makes it even easier for developers to quickly deploy and manage applications in the AWS cloud.
@@ -47,7 +47,7 @@ Elastic Beanstalk Command Line Tools via Homebrew (or
 ```
 
 ## Initialize the Rails app
-The most current version of rails at the time of this writing is 4.2.1so that's what we will use now.
+The most current version of rails at the time of this writing is 4.2.1 so that's what we will use now.
 
 ```bash
   $ gem install rails -v 4.2.1
@@ -66,7 +66,7 @@ We will be creating an example app that just allows you to manipulate posts. To 
 ```
 
 ## Initialize the Elastic Beanstalk app
-This will configure the application in AWS.
+Now we can initialize a new Beanstalk app through the `eb` command.
 
 ```bash
   $ eb init
@@ -96,7 +96,8 @@ I would choose the following settings, but for a description of each option see 
   (y/n): n
 ```
 
-This will set up a `.elasticbeanstalk` directory in the root of your project and add it to your .gitignore file. Let's 
+This will set up a `.elasticbeanstalk` directory in the root of your project and add it to your .gitignore file. You
+do not want your configuration stored in git because there could be private information in there. Let's
 commit those changes now:
 
 ```bash
@@ -104,11 +105,11 @@ commit those changes now:
 ```
 
 ## Creating the Elastic Beanstalk environment
+
 You can have many environments per Elastic Beanstalk application. This can be useful for having both dev and production 
 environments for the same app.
 
 To create a new environment, run the following:
- (we will start the app without the rails app first to make sure it's all set up properly)
 
 ```bash
   $ eb create blog-env:
@@ -182,7 +183,7 @@ Now if you open to your-env.elasticbeanstalk.com/posts you should see your posts
 ## Using PostgreSQL with Rails
 
 Right now our app is just using SQLite, which is not made for production use and cannot be shared across instances.
-Next we'll see how to add PostgreSQL to your app and to your Elastic Beanstalk environment.
+We can solve this by adding PostgreSQL to your app and to your Elastic Beanstalk environment.
 
 ### Adding the pg gem
 
@@ -247,8 +248,8 @@ Now run `$ bundle install` to instal the gem.
 ### Configuring database.yml to work with RDS postgres
 
 Database credentials should never be hard coded and Elastic Beanstalk makes managing environment variables quite simple.
-RDS variables are configured and updated automatically so your production section of database.yml can be updated to be
-the following:
+RDS variables are configured and updated automatically so your production section of `config/database.yml` can be
+updated to be the following:
 
 ```yaml
   production:
@@ -272,7 +273,7 @@ a different region, check there.
 ![Blog App Environment]
 (https://jtescher.github.io/assets/how-to-set-up-a-rails-4-2-app-on-aws-with-elastic-beanstalk-and-postgresql/blog-env.png)
 
-Now click on blog-env and go to configuration on the left nav. At the bottom you should see:
+Now click on `blog-env` and go to `configuration` on the left nav. At the bottom you should see:
 
 ![Data Tier]
 (https://jtescher.github.io/assets/how-to-set-up-a-rails-4-2-app-on-aws-with-elastic-beanstalk-and-postgresql/data-tier.png)
@@ -282,8 +283,8 @@ Now click "create a new RDS database", set the DB Engine to "postgres" and creat
 ![Database Config]
 (https://jtescher.github.io/assets/how-to-set-up-a-rails-4-2-app-on-aws-with-elastic-beanstalk-and-postgresql/db-config.png)
 
-You now should have a fully functioning PostgreSQL instance and the environment variables have been added to your
-Beanstalk environment automatically.
+Click "Save" and you will have a fully functioning PostgreSQL instance and the environment variables have been added to
+your Beanstalk environment automatically.
 
 Now to install the `pg` gem on your server the `postgresql-devel` yum package is required. Configuring packages on
 Elastic Beanstalk instances is as simple as dropping a YAML formatted .config file in a top level .ebextensions folder.
@@ -302,4 +303,7 @@ Now deploy commit this change and redeploy the app.
   $ eb deploy
 ```
 
-Now once this is done you can reload the `/posts` page and see your fully-functional postgres-backed Rails app!
+Now once this is done you can reload the `/posts` page and see your fully-functional postgres-backed Rails app! Hooray!
+
+![Posts Index]
+(https://jtescher.github.io/assets/how-to-set-up-a-rails-4-2-app-on-aws-with-elastic-beanstalk-and-postgresql/posts-index.png)
