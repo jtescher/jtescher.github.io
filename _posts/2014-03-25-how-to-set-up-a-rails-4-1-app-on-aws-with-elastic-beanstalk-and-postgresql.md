@@ -7,6 +7,10 @@ categories: rails postgresql postgres aws elastic beanstalk
 
 ![AWS Elastic Beanstalk](https://jtescher.github.io/assets/how-to-set-up-a-rails-4-1-app-on-aws-with-elastic-beanstalk-and-postgresql/aws-logo.png)
 
+**Update: This post is now a bit outdated. There is a
+[NEW VERSION](http://jtescher.github.io/how-to-set-up-a-rails-4-2-app-on-aws-with-elastic-beanstlk-and-postgresql)
+of this post that has updated instructions for the new Elastic Beanstalk and Rails 4.2.**
+
 Managing ops on a small team can be a real pain. At [WillCall](https://www.getwillcall.com/) our infrastructure is
 pretty simple but we still have to spin up and down lots of servers every day to handle the varying traffic across our
 services. Three years ago when we had just started the company we were doing this manually with
