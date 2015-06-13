@@ -26,3 +26,34 @@ In tis post I will show you how the required current versions of Ruby and Postgr
 configured easily to produce a single easily reproducible and isolated environment using Vagrant.
 
 All code for this post can be found at [github.com/jtescher/vagrant-rails](https://github.com/jtescher/vagrant-rails).
+
+## Creating The Application
+
+For this example we will create a [Rails](http://rubyonrails.org) app that has a database dependency. Remember this will
+work with any application. Also note that for simplicity we are creating the Rails app before we start using Vagrant, so
+you have to have PostgreSQL installed, but once we add Vagrant later in this example it won't be required anymore (if
+you're not happy with this you can skip down and install Vagrant first). Let's first generate a new Rails project that
+we'll call blog.
+
+```bash
+  $ rails new blog --database=postgresql
+  $ cd blog
+```
+
+Let's now give our blog app a `Post` scaffold so we can see some posts with a title and a body.
+
+```bash
+  $ rails generate scaffold post title:string body:string
+  $ rake db:create
+  $ rake db:migrate
+```
+
+Now let's start the server and see what we have so far.
+
+```bash
+  $ rails server
+```
+
+Now if we open [localhost:3000/posts](http://localhost:3000/posts), we see our functional blog scaffold.
+
+![Post scaffold](https://jtescher.github.io/assets/improve-your-dev-environment-with-vagrant/posts-scaffold.png)
