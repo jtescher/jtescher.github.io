@@ -286,14 +286,14 @@ Now click "create a new RDS database", set the DB Engine to "postgres" and creat
 Click "Save" and you will have a fully functioning PostgreSQL instance and the environment variables will have been added to
 your Beanstalk environment automatically.
 
-Now to install the `pg` gem on your server the `postgresql-devel` yum package is required. Configuring packages on
+Now to install the `pg` gem on your server the `postgresql93-devel` yum package is required. Configuring packages on
 Elastic Beanstalk instances is as simple as dropping a YAML formatted .config file in a top level .ebextensions folder.
 
 ```yaml
   # .ebextensions/packages.config
   packages:
     yum:
-      postgresql-devel: []
+      postgresql93-devel: []
 ```
 
 Now commit this change and redeploy the app.
