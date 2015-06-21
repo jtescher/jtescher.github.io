@@ -8,17 +8,12 @@ categories: Vagrant DevOps Chef
 ![Vagrant Logo](https://jtescher.github.io/assets/improve-your-dev-environment-with-vagrant/vagrant-logo.png)
 
 Installing development dependencies for all of your company's applications can be a pain. As a developer this is a
-nuisance that wasts time and breaks your flow, and as a designer this can be so frustrating that it stops you from
+nuisance that wastes time and breaks your flow, and as a designer this can be so frustrating that it stops you from
 running applications altogether.
 
-One example could be if your company is a Ruby on Rails shop, you may have several versions of Ruby running in
-production as you upgrade them individually to the newest version. This means that when people want to run an app
+One example could be if your company works primarily in Ruby on Rails, you may have several versions of Ruby running in production as you upgrade them individually to the newest version. This means that when people want to run an app
 locally, they need to have the app's current version of Ruby installed via a tool like [RVM](https://rvm.io) or
-[rbenv](https://github.com/sstephenson/rbenv). If you are using a database like [PostgreSQL](http://www.postgresql.org)
-in production and want to mirror that configuration in your local development environment to find bugs earlier in the
-process (a practice which I would encourage), then you also might need to have multiple versions of PostgreSQL
-installed. All of these individually versioned development dependencies need to be kept up to date as things get
-upgraded and even as a single developer working on a few applications this can become a mess.
+[rbenv](https://github.com/sstephenson/rbenv). If you are using a database like [PostgreSQL](http://www.postgresql.org) in production and want to mirror that configuration in your local development environment to find bugs earlier in the process (a practice which I would encourage), then you also might need to have multiple versions of PostgreSQL installed. All of these individually versioned development dependencies need to be kept up to date as things get upgraded. This can cause problems for a team of developers, but even as a single developer working on a few applications this can become a mess.
 
 An excellent solution to this problem is to use [Vagrant](https://docs.vagrantup.com) to isolate dependencies and their
 configuration into a single disposable, consistent environment that can be created and destroyed with a single command.
@@ -70,8 +65,8 @@ developers will have to manually update their dependencies. Ugh.
 
 A great solution to this problem is to use [Vagrant](https://docs.vagrantup.com) to manage your dependencies for you.
 This will create an isolated development environment for you in a [virtual
-machine](https://en.wikipedia.org/wiki/Virtual_machine), and at any point if things aren't working properly or if major
-changes get made, you can simply destroy and re-create the whole thing from scratch.
+machine](https://en.wikipedia.org/wiki/Virtual_machine), and at any point if things aren't working properly or if there are major
+changes, you can simply destroy and re-create the whole thing from scratch.
 
 Getting Vagrant installed on your machine is simple with [Homebrew](http://brew.sh).
 
@@ -178,17 +173,3 @@ You can now if we open [localhost:3000/posts](http://localhost:3000/posts), and 
 Vagrant box!
 
 ![Post scaffold](https://jtescher.github.io/assets/improve-your-dev-environment-with-vagrant/posts-scaffold.png)
-
-To remove the VM once you're done working on your application, simply run `$ vagrant destroy` to remove the environment.
-At any time you can easily `$ vagrant up` and have a brand new environment waiting for you!
-
-## Conclusion and TLDR
-
-Vagrant is a great way to create and configure reproducible and portable work environments built on top of
-industry-standard technology. It allows you to have a standard way to configure and maintain the way you build and run
-applications locally. Once someone creates a `Vagrantfile`, anyone can simply clone the project and `$ vagrant up` to
-get a fully functional environment in minutes. For designers this means that any time you run into problems, you know
-you can simply `$ vagrant destroy` and `$ vagrant up` to fix things. For operations engineers it means having a standard
-way to test Chef cookbooks and even deploy to clouds like AWS with the same configuration that was used to develop the
-application. And finally for app developers it means having a consistent environment for development, testing, and
-production that can easily be maintained and updated across your whole team.
