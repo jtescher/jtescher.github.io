@@ -59,7 +59,7 @@ If we open [localhost:3000/posts](http://localhost:3000/posts), we see our funct
 ![Post scaffold](https://jtescher.github.io/assets/improve-your-dev-environment-with-vagrant/posts-scaffold.png)
 
 
-## Adding Vagrant
+## Installing Vagrant
 
 Up until now this has been a pretty typical development process for anyone interacting with a Rails app. You will notice
 that anyone who wants to work on your blog has to do a few things now just to get it up and running. Even though this
@@ -89,7 +89,7 @@ manager plugin [vagrant-berkshelf](https://github.com/berkshelf/vagrant-berkshel
   $ vagrant plugin install vagrant-berkshelf
 ```
 
-## Configuring Vagrant
+## Adding Vagrant To Your Project
 
 Vagrant can be configured simply through a `Vagrantfile` at the root of your project. Let's add one now for this
 project.
@@ -145,7 +145,7 @@ And the final step is to install the cookbooks with:
 
 ## Running Vagrant
 
-Now for the magic part. To start your new virtual development environment run 
+Now for the magic part. To start your new virtual development environment run:
 
 ```bash
 $ vagrant up
@@ -169,7 +169,7 @@ $ rake db:migrate
 
 Your environment is now ready! Let's start the server:
 
-``
+```bash
 $ rails server -b 0.0.0.0
 ```
 
