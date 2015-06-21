@@ -58,6 +58,7 @@ If we open [localhost:3000/posts](http://localhost:3000/posts), we see our funct
 
 ![Post scaffold](https://jtescher.github.io/assets/improve-your-dev-environment-with-vagrant/posts-scaffold.png)
 
+Let's now stop the server with `Ctrl-C` and get the app running inside of Vagrant.
 
 ## Installing Vagrant
 
