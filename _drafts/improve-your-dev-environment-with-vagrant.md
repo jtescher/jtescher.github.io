@@ -22,8 +22,8 @@ upgraded and even as a single developer working on a few applications this can b
 
 An excellent solution to this problem is to use [Vagrant](https://docs.vagrantup.com) to isolate dependencies and their
 configuration into a single disposable, consistent environment that can be created and destroyed with a single command.
-In tis post I will show you how the required current versions of Ruby and PostgreSQL for example can be added and
-configured easily to produce a single easily reproducible and isolated environment using Vagrant.
+In this post I will show you how the required current versions of Ruby and PostgreSQL can be added and configured easily
+to produce a single easily-reproducible and isolated environment using Vagrant.
 
 All code for this post can be found at [github.com/jtescher/vagrant-rails](https://github.com/jtescher/vagrant-rails).
 
@@ -54,7 +54,7 @@ Now let's start the server and see what we have so far.
   $ rails server
 ```
 
-Now if we open [localhost:3000/posts](http://localhost:3000/posts), we see our functional blog scaffold.
+If we open [localhost:3000/posts](http://localhost:3000/posts), we see our functional blog scaffold.
 
 ![Post scaffold](https://jtescher.github.io/assets/improve-your-dev-environment-with-vagrant/posts-scaffold.png)
 
@@ -127,7 +127,7 @@ Vagrant.configure(2) do |config|
 end
 ```
 
-To download and version the cookbooks used by chef we can add a `Berksfile` at the root of your project.
+To download and version the cookbooks used by Chef we can add a `Berksfile` at the root of your project.
 
 ```ruby
 source 'https://supermarket.getchef.com'
@@ -151,18 +151,23 @@ Now for the magic part. To start your new virtual development environment run
 $ vagrant up
 ```
 
-Now that your environment has been created, let's ssh into it and get our rails app running.
+After your environment has been created, let's ssh into it and get our rails app running.
 
 ```bash
 $ vagrant ssh
 $ cd /vagrant/
 $ bundle install
+```
+
+And we can create the development PostgreSQL database via:
+
+```bash
 $ sudo -u postgres createuser -s vagrant
 $ rake db:create
 $ rake db:migrate
 ```
 
-Your environment is now ready!
+Your environment is now ready! Let's start the server:
 
 ``
 $ rails server -b 0.0.0.0
