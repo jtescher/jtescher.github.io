@@ -57,3 +57,118 @@ Now let's start the server and see what we have so far.
 Now if we open [localhost:3000/posts](http://localhost:3000/posts), we see our functional blog scaffold.
 
 ![Post scaffold](https://jtescher.github.io/assets/improve-your-dev-environment-with-vagrant/posts-scaffold.png)
+
+
+## Adding Vagrant
+
+Up until now this has been a pretty typical development process for anyone interacting with a Rails app. You will notice
+that anyone who wants to work on your blog has to do a few things now just to get it up and running. Even though this
+app couldn't be simpler, they have to have the right version of Rails installed and all of the other gems in your
+`Gemfile` as well as the right version of PostgreSQL. If you make any changes to either of those things, all other
+developers will have to manually update their dependencies. Ugh.
+
+A great solution to this problem is to use [Vagrant](https://docs.vagrantup.com) to manage your dependencies for you.
+This will create an isolated development environment for you in a [virtual
+machine](https://en.wikipedia.org/wiki/Virtual_machine), and at any point if things aren't working properly or if major
+changes get made, you can simply destroy and re-create the whole thing from scratch.
+
+Getting Vagrant installed on your machine is simple with [Homebrew](http://brew.sh).
+
+```bash
+  $ brew install caskroom/cask/brew-cask
+  $ brew cask install virtualbox
+  $ brew cask install vagrant
+```
+
+Now that we have [VirtualBox](https://www.virtualbox.org) installed, we can use [Chef](https://www.chef.io) through
+Vagrant to provision the VM's. Let's install Chef, the [ChefDK](https://downloads.chef.io/chef-dk), and the cookbook
+manager plugin [vagrant-berkshelf](https://github.com/berkshelf/vagrant-berkshelf) as the final part of our setup.
+
+```bash
+  $ brew cask install chefdk
+  $ vagrant plugin install vagrant-berkshelf
+```
+
+## Configuring Vagrant
+
+Vagrant can be configured simply through a `Vagrantfile` at the root of your project. Let's add one now for this
+project.
+
+```ruby
+Vagrant.configure(2) do |config|
+
+  # Use ubuntu base
+  config.vm.box = "ubuntu/trusty64"
+
+  # Forward Rails port
+  config.vm.network "forwarded_port", guest: 3000, host: 3000
+
+  # Configure chef recipes
+  config.vm.provision :chef_zero do |chef|
+    chef.json = {
+      'postgresql' => {
+        'password'  => {
+          'postgres' => 'iloverandompasswordsbutthiswilldo'
+        }
+      }
+    }
+    chef.run_list = [
+      # Install Ruby
+      "recipe[ruby-ng::dev]",
+
+      # Install Node.js for rails assets
+      "recipe[nodejs::default]",
+
+      # Install PostgreSQL DB
+      "recipe[postgresql::server]"
+    ]
+  end
+
+end
+```
+
+To download and version the cookbooks used by chef we can add a `Berksfile` at the root of your project.
+
+```ruby
+source 'https://supermarket.getchef.com'
+
+cookbook 'ruby-ng', '~> 0.3.0'
+cookbook 'postgresql', '~> 3.4.20'
+cookbook 'nodejs', '~> 2.4.0'
+```
+
+And the final step is to install the cookbooks with:
+
+```bash
+  $ berks install
+```
+
+## Running Vagrant
+
+Now for the magic part. To start your new virtual development environment run 
+
+```bash
+$ vagrant up
+```
+
+Now that your environment has been created, let's ssh into it and get our rails app running.
+
+```bash
+$ vagrant ssh
+$ cd /vagrant/
+$ bundle install
+$ sudo -u postgres createuser -s vagrant
+$ rake db:create
+$ rake db:migrate
+```
+
+Your environment is now ready!
+
+``
+$ rails server -b 0.0.0.0
+```
+
+You can now if we open [localhost:3000/posts](http://localhost:3000/posts), and see your posts scaffold served from the
+Vagrant box!
+
+![Post scaffold](https://jtescher.github.io/assets/improve-your-dev-environment-with-vagrant/posts-scaffold.png)
