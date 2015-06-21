@@ -173,3 +173,17 @@ You can now if we open [localhost:3000/posts](http://localhost:3000/posts), and 
 Vagrant box!
 
 ![Post scaffold](https://jtescher.github.io/assets/improve-your-dev-environment-with-vagrant/posts-scaffold.png)
+
+To remove the VM once you're done working on your application, simply run `$ vagrant destroy` to remove the environment.
+At any time you can easily `$ vagrant up` and have a brand new environment waiting for you!
+
+## Conclusion and TLDR
+
+Vagrant is a great way to create and configure reproducible and portable work environments built on top of
+industry-standard technology. It allows you to have a standard way to configure and maintain the way you build and run
+applications locally. Once someone creates a `Vagrantfile`, anyone can simply clone the project and `$ vagrant up` to
+get a fully functional environment in minutes. For designers this means that any time you run into problems, you know
+you can simply `$ vagrant destroy` and `$ vagrant up` to fix things. For operations engineers it means having a standard
+way to test Chef cookbooks and even deploy to clouds like AWS with the same configuration that was used to develop the
+application. And finally, for app developers it means having a consistent environment for development, testing, and
+production that can easily be maintained and updated across your whole team.
