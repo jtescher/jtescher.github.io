@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Improve Your Dev Environment With Vagrant"
-date:   1970-01-01 00:00:00
+date:   2015-06-22 09:00:00
 categories: Vagrant DevOps Chef
 ---
 
