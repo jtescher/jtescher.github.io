@@ -170,3 +170,11 @@ necessary dependencies. (serving the app and testing the app should be as simple
 + Include a [resetdb](https://github.com/jtescher/play-api/blob/master/resetdb) script that drops and re-creates the
 database for testing and new developers.
 
+## TLDR
+
+Sticking to the conventions of your framework can make development processes streamlined and avoid
+[bikeshedding](https://en.wikipedia.org/wiki/Parkinson%27s_law_of_triviality). If your framework does not have
+conventions then you should adopt conventions similar to the ones I laid out in this post to gain the same benefits.
+These conventions apply to creating CRUD API's, but you should always find conventions and best practices for the
+particular architectural style that your app, framework, and language uses.
+
