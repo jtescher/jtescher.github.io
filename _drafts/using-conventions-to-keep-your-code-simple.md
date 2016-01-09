@@ -22,7 +22,8 @@ any framework and language. All code can be found at [jtescher/play-api](https:/
 The CRUD API is the bread and butter of every startup's products and if your problem can fit into the confines of this
 simple architecture it will remain easy to make large changes quickly and with confidence. The availability of open
 source JSON REST clients in basically all languages makes it extremely quick to develop and change applications. Many of
-these conventions come from [Rails](http://rubyonrails.org) and [Ember](http://emberjs.com).
+my convention recommendations are inspired by the [Rails](http://rubyonrails.org) and [Ember](http://emberjs.com)
+conventions.
 
 ### Routing Conventions
 
@@ -32,7 +33,7 @@ Data](http://emberjs.com/api/data/classes/DS.RESTSerializer.html) without having
 a few conventions to keep things simple and clean.
 
 + Use URL based API versioning. E.g. `/v1/posts`.
-+ Use 5 standard endpoints with appropriate HTTP verb:
++ Use 5 standard endpoints with appropriate HTTP verbs:
 + Use shallow nesting `/v1/posts/1/comments` and `/v1/comments/2` instead of `/v1/posts/1/comments/2`.
 
 ```
@@ -103,48 +104,69 @@ into more appropriate services.
 
 Data access concerns including database specific logic or remote API call specifics should be encapsulated here and
 hidden from the service layer as much as possible. If your data access objects do not look uniform and simple consider
-re-thinking your schema or API as this can be a warning sign that things could be overly complicated.
+re-thinking your schema or API as this can be a warning sign that things might be overly complicated.
 
 + User the singularized resource name with `DAO` suffix. E.g. `PostDAO`.
 + Create one DAO per database table or remote resource.
 + Move repetitive create, read, update, delete functions into shared
-[DAOConventions](app/com/example/api/daos/DAOConventions.scala).
+[DAOConventions](https://github.com/jtescher/play-api/blob/master/app/com/example/api/daos/DAOConventions.scala).
 
 ## Database Migrations
 
-+ Use environment variables for database connection configuration in [application.conf](conf/application.conf).
-+ Use [Liquibase](http://www.liquibase.org) to perform migrations and [Play
-  Liquibase](https://github.com/Ticketfly/play-liquibase)
-to have migrations run in dev / test mode.
+In modern development and production environments database schema changes must be versioned and performed in an
+automated way. Raw SQL hand written SQL statements should be avoided at all costs as well as anyone making database
+changes by SSH'ing into the server and running `ALTER TABLE` statements manually. If the framework you are using is like
+Play and does not include great tools for automating database migrations out of the box, I would recommend using
+[Liquibase](http://www.liquibase.org) to perform migrations and a library like
+[Play Liquibase](https://github.com/Ticketfly/play-liquibase) to automate running migrations in dev and test
+environments.
+
++ Use environment variables for database connection configuration in
+[application.conf](https://github.com/jtescher/play-api/blob/master/conf/application.conf).
 + Use `YYYMMDDHHMMSS_database_migration_description.xml` as changelog names.
 + Tag your database after making each significant change for easy rollback.
 
+## Tests
+
+Testing is an essential part of application development as it provides crucial feedback on your application architecture
+and design during the dev process as well as providing confidence while refactoring. For Scala applications prefer
+[ScalaTest](http://www.scalatest.org) over [Specs2](https://etorreborre.github.io/specs2) and include integration tests
+and unit tests in the same package as the source files.
+
++ Use `Spec` as the suffix for unit tests and `IntegrationSpec` as the suffix for integration tests.
++ Reset the DB before each integration test with 
+[DatabaseCleaner](https://github.com/jtescher/play-api/blob/master/test/utils/DatabaseCleaner.scala) to avoid
+order-dependant tests.
++ Prefer a real database over an in-memory stand in for integration tests to find DB specific bugs.
++ Use a Factory library or create your own simple factories like
+[PostFactory](https://github.com/jtescher/play-api/blob/master/test/factories/PostFactory.scala) to keep test setup DRY
+and expressive.
++ Prefer high level integration tests for common paths and unit tests for edge cases and full coverage.
+
 ## Plugins
+
+Certain concerns like test coverage and code conventions are very infrequently packaged with frameworks and must be
+included to support modern development flows. For Play I recommend the following plugins:
 
 + Use [Scoverage](https://github.com/scoverage/sbt-scoverage) with `coverageMinimum := 100` and `coverageFailOnMinimum
   := true`
-in [build.sbt](build.sbt).
+in [build.sbt](https://github.com/jtescher/play-api/blob/master/build.sbt).
 + Use [Scalastyle](http://www.scalastyle.org/sbt.html) with `level="error"` in
-  [scalastyle-config.xml](scalastyle-config.xml).
+  [scalastyle-config.xml](https://github.com/jtescher/play-api/blob/master/scalastyle-config.xml).
 + Use [Scalariform](https://github.com/daniel-trinh/scalariform) for standard style enforcement.
 + Use a server monitoring tool like New Relic with [sbt-newrelic](https://github.com/gilt/sbt-newrelic).
 + Enforce UTC timezone in JVM with [sbt-utc](https://github.com/tim-group/sbt-utc).
 
 ## Additional Files
 
-+ Include a [.java-version](.java-version) file with the expected Java version.
-+ Include a [activator](activator) wrapper file that downloads all necessary dependencies
-(serving the app and testing the app should be as simple as: `$ ./activator run` and `$ ./activator test`).
-+ Include a [resetdb](resetdb) script that drops and re-creates the database for testing and new developers.
+Applications on the JVM often have difficult initial setup procedures. In order to have the smoothest dev process you
+should include a few extra files for convenience.
 
-## Tests
-
-+ Prefer [ScalaTest](http://www.scalatest.org) over [Specs2](https://etorreborre.github.io/specs2).
-+ Include integration tests and unit tests in the same package as the source files.
-+ Use `Spec` as the suffix for unit tests and `IntegrationSpec` as the suffix for integration tests.
-+ Reset the DB before each integration test with [DatabaseCleaner](test/utils/DatabaseCleaner.scala) to avoid
-  order-dependant tests.
-+ Prefer a real database over an in-memory stand in for integration tests to find DB specific bugs.
-+ Use factories like the [PostFactory](test/factories/PostFactory.scala) to keep test setup DRY and expressive.
-+ Prefer high level integration tests for common paths and unit tests for edge cases and full coverage.
++ Include a [.java-version](https://github.com/jtescher/play-api/blob/master/.java-version) file with the expected Java
+version.
++ Include a [activator](https://github.com/jtescher/play-api/blob/master/activator) wrapper file that downloads all
+necessary dependencies. (serving the app and testing the app should be as simple as: `$ ./activator run` and
+`$ ./activator test`).
++ Include a [resetdb](https://github.com/jtescher/play-api/blob/master/resetdb) script that drops and re-creates the
+database for testing and new developers.
 
