@@ -117,12 +117,11 @@ re-thinking your schema or API as this can be a warning sign that things might b
 ## Database Migrations
 
 In modern development and production environments database schema changes must be versioned and performed in an
-automated way. Raw handwritten SQL statements should be avoided at all costs as well as anyone making database
-changes by SSHing into the server and running `ALTER TABLE` statements manually. If the framework you are using is like
-Play and does not include great tools for automating database migrations out of the box, I would recommend using
-[Liquibase](http://www.liquibase.org) to perform migrations and a library like
-[Play Liquibase](https://github.com/Ticketfly/play-liquibase) to automate running migrations in dev and test
-environments.
+automated way. Raw handwritten SQL statements should be avoided at all costs as well as SSHing into the server and
+running `ALTER TABLE` statements manually. If the framework you are using is like Play and does not include great tools
+for automating database migrations out of the box, I would recommend using [Liquibase](http://www.liquibase.org) to
+perform migrations and a library like [Play Liquibase](https://github.com/Ticketfly/play-liquibase) to automate running
+migrations in dev and test environments.
 
 + Use environment variables for database connection configuration in
 [application.conf](https://github.com/jtescher/play-api/blob/master/conf/application.conf).
@@ -132,7 +131,7 @@ environments.
 ## Tests
 
 Testing is an essential part of application development as it provides crucial feedback on your application architecture
-and design during the dev process as well as providing confidence while refactoring. For Scala applications prefer
+and design during the dev process as well as confidence while refactoring. For Scala applications it's best to prefer
 [ScalaTest](http://www.scalatest.org) over [Specs2](https://etorreborre.github.io/specs2) and include integration tests
 and unit tests in the same package as the source files.
 
