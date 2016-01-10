@@ -6,10 +6,10 @@ categories: startups advice code conventions
 ---
 
 One piece of advice I wish I had been given when I started my first company was how to structure conventions in my
-codebases. It may not seem like a big deal when you're hacking out your first prototypes in your garage, but a small
+codebases. It may not seem like a big deal when you're hacking your first prototypes in a garage, but a small
 amount of discipline can make the difference between having malleable code that allows you to keep up with the changing
-demands of your industry and writing yourself into a place where you have to throw everything out and re-write every
-time requirements change as you search for product / market fit.
+demands of your industry and writing yourself into a place where you have to throw everything out every
+time requirements change as you search for product / market fit. (long sentence, edited down)
 
 In this post I'll show you an example of a basic conventional
 [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer)
@@ -19,7 +19,7 @@ any framework and language. All code can be found at [jtescher/play-api](https:/
 
 ## The CRUD API server
 
-The CRUD API is the bread and butter of every startup's products and if your problem can fit into the confines of this
+The CRUD API is the bread and butter of every startup's products. If your problem can fit into the confines of this
 simple architecture it will remain easy to make large changes quickly and with confidence. The availability of open
 source JSON REST clients in basically all languages makes it extremely quick to develop and change applications. Many of
 my convention recommendations are inspired by the [Rails](http://rubyonrails.org) and [Ember](http://emberjs.com)
@@ -76,7 +76,7 @@ ways of having your serializers written for you as it can make your payloads mor
 
 + Create one serializer per model.
 + Avoid having domain logic in your serializers wherever possible.
-+ User the singularized resource name with `Serializer` suffix. E.g. `PostSerializer`.
++ Use the singularized resource name with `Serializer` suffix. E.g. `PostSerializer`.
 
 ```scala
 implicit val postJsonWrites = new Writes[Post] {
@@ -96,7 +96,7 @@ one concern and one level of abstraction as much as possible. If you find your s
 orchestration and low level work, or mixing concerns from multiple domains, you should consider breaking the logic
 into more appropriate services.
 
-+ User the singularized resource name with `Service` suffix. E.g. `PostService`.
++ Use the singularized resource name with `Service` suffix. E.g. `PostService`.
 + Use dependency injection to keep services decoupled.
 + Keep services small and preferably < 100 lines of code.
 
@@ -106,7 +106,7 @@ Data access concerns including database specific logic or remote API call specif
 hidden from the service layer as much as possible. If your data access objects do not look uniform and simple consider
 re-thinking your schema or API as this can be a warning sign that things might be overly complicated.
 
-+ User the singularized resource name with `DAO` suffix. E.g. `PostDAO`.
++ Use the singularized resource name with `DAO` suffix. E.g. `PostDAO`.
 + Create one DAO per database table or remote resource.
 + Move repetitive create, read, update, delete functions into shared
 [DAOConventions](https://github.com/jtescher/play-api/blob/master/app/com/example/api/daos/DAOConventions.scala).
@@ -114,8 +114,8 @@ re-thinking your schema or API as this can be a warning sign that things might b
 ## Database Migrations
 
 In modern development and production environments database schema changes must be versioned and performed in an
-automated way. Raw SQL hand written SQL statements should be avoided at all costs as well as anyone making database
-changes by SSH'ing into the server and running `ALTER TABLE` statements manually. If the framework you are using is like
+automated way. Raw SQL handwritten SQL statements (Raw SQL hand written SQL???) should be avoided at all costs as well as anyone making database
+changes by SSHing into the server and running `ALTER TABLE` statements manually. If the framework you are using is like
 Play and does not include great tools for automating database migrations out of the box, I would recommend using
 [Liquibase](http://www.liquibase.org) to perform migrations and a library like
 [Play Liquibase](https://github.com/Ticketfly/play-liquibase) to automate running migrations in dev and test
@@ -129,7 +129,7 @@ environments.
 ## Tests
 
 Testing is an essential part of application development as it provides crucial feedback on your application architecture
-and design during the dev process as well as providing confidence while refactoring. For Scala applications prefer
+and design during the dev process as well as providing confidence while refactoring. Scala applications prefer
 [ScalaTest](http://www.scalatest.org) over [Specs2](https://etorreborre.github.io/specs2) and include integration tests
 and unit tests in the same package as the source files.
 
@@ -174,7 +174,7 @@ database for testing and new developers.
 
 Sticking to the conventions of your framework can make development processes streamlined and avoid
 [bikeshedding](https://en.wikipedia.org/wiki/Parkinson%27s_law_of_triviality). If your framework does not have
-conventions then you should adopt conventions similar to the ones I laid out in this post to gain the same benefits.
-These conventions apply to creating CRUD API's, but you should always find conventions and best practices for the
+conventions then you could gain the same benefits by adopting conventions similar to the ones I laid out in this post.
+These conventions apply specifically to CRUD API's, but you should always find conventions and best practices for the
 particular architectural style that your app, framework, and language uses.
 
