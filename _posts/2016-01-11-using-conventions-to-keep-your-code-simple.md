@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Using conventions to keep your code simple"
-date:   1970-01-01 00:00:00
+date:   2016-01-11 09:00:00
 categories: startups advice code conventions
 ---
 
