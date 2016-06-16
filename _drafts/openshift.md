@@ -5,7 +5,7 @@ date:   1970-01-01 00:00:00
 categories:
 ---
 
-## Installation
+## Installing OpenShift
 
 1. Install vagrant from [VagrantUp.com](https://www.vagrantup.com/)
 1. Install the `vagrant-host-route` plugin via `$ vagrant plugin install vagrant-host-route`
@@ -44,3 +44,30 @@ Then to start the OpenShift VM, run `$ vagrant up` in this directory.
 
 You can now view the sample application running at
 [frontend-sample.apps.10.2.2.2.xip.io](http://frontend-sample.apps.10.2.2.2.xip.io/)
+
+## Deploying a Play application
+
+1. Create a new OpenShift project to host your application: `$ oc new-project local-dev`
+1. Create a new template for the application (see
+   [the docs](https://docs.openshift.org/latest/dev_guide/templates.html#writing-templates) for information about
+   templates):
+
+```yaml
+kind: Template
+apiVersion: v1
+metadata:
+  name: "play-scala-postgres"
+  annotations:
+    description: "An example Play Framework application with PostgreSQL database"
+    tags: "instant-app,scala,play,postgres"
+    iconClass: "icon-scala"
+labels:
+  template: "play-scala-postgres"
+objects:
+- kind: BuildConfig
+    apiVersion: v1
+    metadata:
+      name: "play-scala-postgres"
+      annotations:
+        description: "Defines how to build the Play application"
+```
