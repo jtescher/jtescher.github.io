@@ -1,6 +1,6 @@
 name: Blog
 markdown: redcarpet
-highlighter: pygments
+highlighter: rouge
 
 permalink: /:title/
 title: Julian Tescher Does The Internet
@@ -14,7 +14,9 @@ author:
   name: 'Julian Tescher'
   email: jatescher@gmail.com
   url: https://twitter.com/jatescher
-  
+
+plugins:
+  - jekyll-paginate
 paginate: 5
 
 version: 1.0.0
@@ -22,7 +24,6 @@ github:
   profile: https://github.com/jtescher
   download: https://github.com/jtescher/jtescher.github.io/archive/master.zip
   repo: https://github.com/jtescher/jtescher.github.io
-  
+
 ga_domain: jtescher.github.io
 ga_tracking_id: UA-47260751-2
-  
