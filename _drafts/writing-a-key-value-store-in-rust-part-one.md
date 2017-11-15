@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Writing A Key Value Store In Rust: Part One"
+title:  "Writing A Key Value Store In Rust Part One: Embedded HashMap"
 date:   2017-11-10 09:00:00
 categories: rust databases
 ---
@@ -13,11 +13,10 @@ teach you intermediate or advanced concepts without a large up front time commit
 these more complicated concepts is to try to find or build a toy implementation that lets you see the structure of the
 idea or solution without having to understand all of the details and optimizations at once.
 
-In this blog post I will build a very simple database from scratch as example. It will be a key value store instead of
-a full relational database for simplicity but as you will see many of the concepts would carry over. I will also be
-working in [rust](https://www.rust-lang.org/) both because it's good to pick up new languages and because rust is a
-systems language so it is particularly well suited for this type of application because of it's speed and concurrency
-strength.
+In this blog post series I will build a very simple database from scratch as example. It will be a key value store
+instead of a full relational database for simplicity but as you will see many of the concepts would carry over. I will
+also be working in [rust](https://www.rust-lang.org/) both because it's good to pick up new languages and because rust
+is a systems language so it is particularly well suited for this type of application.
 
 All of my code for this project is available on github at [jtescher/tokio-minidb](https://github.com/jtescher/tokio-minidb/tree/v1).
 
@@ -190,7 +189,7 @@ impl DB for InMemoryDB {
 }
 ```
 
-Our `InMemoryDB` is nothing more than a wrapper around rust's `HashMap` class. Each method call to `get`, `put` or
+Our `InMemoryDB` is nothing more than a wrapper around rust's `HashMap` struct. Each method call to `get`, `put` or
 `delete` can simply delegate to the underlying `HashMap` and the `iter` method can iterate over the keys and values in
 the map.
 
