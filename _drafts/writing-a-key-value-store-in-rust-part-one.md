@@ -8,14 +8,14 @@ categories: rust databases
 ![Oracle Database Icon Style Offices](/assets/writing-a-key-value-store-in-rust-part-one/databases.jpg)
 
 As an engineer it's important to find ways to increase your technical skills. There are lots of projects to get you
-started with a language or framework but once you move beyond the basics it is not always easy to find projects that can
+started with a language or framework but once you move beyond the basics, it is not always easy to find projects that can
 teach you intermediate or advanced concepts without a large up front time commitment. A good way to approach learning
 these more complicated concepts is to try to find or build a toy implementation that lets you see the structure of the
 idea or solution without having to understand all of the details and optimizations at once.
 
 In this blog post series I will build a very simple database from scratch as example. It will be a key value store
 instead of a full relational database for simplicity but as you will see many of the concepts would carry over. I will
-also be working in [rust](https://www.rust-lang.org/) both because it's good to pick up new languages and because rust
+also be working in [Rust](https://www.rust-lang.org/) both because it's good to pick up new languages and because Rust
 is a systems language so it is particularly well suited for this type of application.
 
 All of my code for this project is available on github at [jtescher/tokio-minidb](https://github.com/jtescher/tokio-minidb/tree/v1).
@@ -41,7 +41,7 @@ Now that you know what key value stores are and why you might want to build a si
 
 ## Create The New Rust Project
 
-To start, let's create a new rust project using [Cargo](http://doc.crates.io). We will be using [Tokio](https://tokio.rs)
+To start, let's create a new Rust project using [Cargo](http://doc.crates.io). We will be using [Tokio](https://tokio.rs)
 which I will explain later to provide a network interface for the server, but for now lets call the project
 `tokio-minidb`:
 
@@ -61,7 +61,7 @@ Hello, world!
 
 ### Sketch the API
 
-Excellent. now that we have a working rust app scaffold, let's sketch out a simple use case for storing and retrieving
+Excellent. now that we have a working Rust app scaffold, let's sketch out a simple use case for storing and retrieving
 some data. Open your `src/main.rs` file and replace it with the following:
 
 ```rust
@@ -135,8 +135,8 @@ impl<'a> Iterator for DBIterator<'a> {
 type DBResult = Result<Option<String>, io::Error>;
 ```
 
-Using just the rust standard library we have defined a trait that we can implement to store and retrieve our data. We
-also defined an `iter` method and using the rust convention we use a struct to hold the state of the iterator and
+Using just the Rust standard library we have defined a trait that we can implement to store and retrieve our data. We
+also defined an `iter` method and using the Rust convention we use a struct to hold the state of the iterator and
 implement the `Iterator` trait so we can do simple `for (key, value) in db` syntax in the main file. We also defined a
 `DBResult` type for our methods so they will all return an optional string or an io error when they are called.
 
@@ -189,7 +189,7 @@ impl DB for InMemoryDB {
 }
 ```
 
-Our `InMemoryDB` is nothing more than a wrapper around rust's `HashMap` struct. Each method call to `get`, `put` or
+Our `InMemoryDB` is little more than a wrapper around Rust's `HashMap` struct. Each method call to `get`, `put` or
 `delete` can simply delegate to the underlying `HashMap` and the `iter` method can iterate over the keys and values in
 the map.
 
@@ -233,6 +233,6 @@ Final db: InMemoryDB { data: {} }
 
 ## For Next Time
 
-You now have a working (very minimal) in memory key value store that can be embedded in other applications as a rust
+You now have a working (very minimal) in memory key value store that can be embedded in other applications as a Rust
 package (crate). In the next part I will show you how to expose this database over the network so other applications can
 store and retrieve their data.

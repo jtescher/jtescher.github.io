@@ -10,8 +10,9 @@ categories: rust databases
 _This is part two of a series on learning intermediate programming concepts by writing a database from scratch in Rust.
 You can read part one [here](/writing-a-key-value-store-in-rust-part-one) first to catch up_.
 
-In the previous post we created a rust crate that allows us to embed a simple key value store in another application.
+In the previous post we created a Rust crate that allows us to embed a simple key value store in another application.
 We can now extend this project to be available as a separate server that multiple clients can connect to over a network.
+
 There is a great project in the Rust ecosystem called [Tokio](https://tokio.rs) that describes itself as "A platform for
 writing fast networking code with Rust." and it will allow us to define a network protocol that we can use to interact
 with our database.
@@ -33,9 +34,9 @@ telnet: connect to address ::1: Connection refused
 Trying 127.0.0.1...
 Connected to localhost.
 Escape character is '^]'.
-GET user-1
+get user-1
 None
-PUT user-1 '{"first_name": "John", "last_name": "Doe"}'
+put user-1 '{"first_name": "John", "last_name": "Doe"}'
 None
 get user-1
 '{"first_name": "John", "last_name": "Doe"}'
@@ -47,12 +48,15 @@ to make encoding and decoding these byte streams relatively easy.
 
 ## Adding Tokio
 
-Tokio is broken up into several crates (rust packages) that let you work with different layers of abstraction
+Tokio is broken up into several crates (Rust packages) that let you work with different layers of abstraction
 depending on how much control you want. It provides high level interfaces that let you build applications that
 interact with the network with minimal boilerplate code. If you want to learn more about how it works and see what else
-you could build including high performance web servers check out their [documentation](https://tokio.rs). Let's add it
-to our `Cargo.toml` file now under dependencies. We will also add the [futures](https://docs.rs/futures) crate for
-working with async code, and the [nom](https://github.com/Geal/nom) crate for generating our command parser:
+you could build, including high performance web servers, check out their
+[documentation](https://tokio.rs/docs/getting-started/tokio/).
+
+Let's add it to our `Cargo.toml` file now under
+dependencies. We will also add the [futures](https://docs.rs/futures) crate for working with async code, and the
+[nom](https://github.com/Geal/nom) crate for generating our command parser:
 
 ```toml
 [dependencies]
@@ -70,8 +74,8 @@ num_cpus = "1.7.0"
 
 The first step to having our application understand the data coming off the network is to define command objects that we
 can try to extract from the stream of bytes. Let's add a `DBCommand` enum that lists all of our supported commands and
-a `process_command` method that looks at the given command and calls the corresponding method with the data. Replace
-the contents of `src/lib.rs` with the following:
+a `process_command` method that looks at the given command and calls the corresponding method with the data. Add the
+following to `src/lib.rs`:
 
 ```rust
 extern crate bytes;
@@ -89,14 +93,9 @@ use std::sync::{Arc, Mutex};
 pub mod server;
 mod storage;
 pub use storage::in_memory_db::InMemoryDB;
-pub use storage::persistent_db::PersistentDB;
 
-// Simple key value database interface
-pub trait DB: Sized {
-    fn new() -> Result<Self, io::Error>;
-    fn get(&self, key: &String) -> DBResult;
-    fn put(&mut self, key: String, value: String) -> DBResult;
-    fn delete(&mut self, key: &String) -> DBResult;
+...
+
     fn iter(&self) -> DBIterator;
 
     // Helper function to build thread safe reference
@@ -115,17 +114,7 @@ pub trait DB: Sized {
     }
 }
 
-pub struct DBIterator<'a> {
-    inner: Iter<'a, String, String>,
-}
-
-impl<'a> Iterator for DBIterator<'a> {
-    type Item = (&'a String, &'a String);
-
-    fn next(&mut self) -> Option<Self::Item> {
-        self.inner.next()
-    }
-}
+...
 
 #[derive(Debug)]
 pub enum DBCommand {
@@ -267,25 +256,28 @@ named!(cmd_delete<&[u8], DBCommand>,
 ```
 
 As you can see our `parse_command` function now does what we want by taking a `&[u8]` and returning a `DBCommand`. Each
-command is created using the `named!` macro provided by nom and the accompanying `do_parse` methods are fairly easy to
+command is created using the `named!` macro provided by nom and the accompanying `do_parse` macros are fairly easy to
 understand without needing to fully grasp the complexity of how parsers work. Keys and values can be extracted from their
 space delimited position. For example the bytes of the string "GET user-1" are converted into
 `DBCommand::Get("user-1")` by matching the string "get" uppercase or lower case, then one or more white spaces and then
 the rest of the bytes are extracted as the string for the key we want to get.
 
+Once we have our parser and codec we need to define how clients should interact with our server via the line protocol
+we sketched out at the beginning of this post.
+
 ## Implementing The Line Protocol
 
-A Tokio protocol is a way of providing or consuming a service. Services can be defined by implementing `ServerProto`
-traits and clients can be defined by implementing `ClientProto` traits. You can read more about the different
-protocol types [here](https://docs.rs/tokio-proto) but broadly speaking they can either be Pipelined (server responds to
-client requests in the order they were sent) or Multiplexed (the server responds to client requests in the order of
-completion and request IDs are used to match responses back to requests). They can also be streaming protocols (requests
-and responses can carry body streams which allows partial processing before the complete body has been transferred) or
-non-streaming (the client sends a complete request in a single message, and the server provides a complete response in
-a single message).
+Tokio provides the tools for implementing many of different types of protocols via the
+[tokio-proto](https://github.com/tokio-rs/tokio-proto) crate. You can read more about the different protocol types
+[here](https://docs.rs/tokio-proto) but broadly speaking they can either be **pipelined** (server responds to client
+requests in the order they were sent) or **multiplexed** (the server responds to client requests in the order of
+completion and request IDs are used to match responses back to requests). They can also be **streaming** protocols
+(requests and responses can carry body streams which allows partial processing before the complete body has been
+transferred) or **non-streaming** (the client sends a complete request in a single message, and the server provides a
+complete response in a single message).
 
 For our line protocol we don't need to stream requests and responses and we don't want to have to match request and
-response IDs so we can go with a simple pipelined non-streaming `tokio_proto::pipeline::ServerProto`.
+response IDs so we can go with the simple pipelined and non-streaming `tokio_proto::pipeline::ServerProto`.
 
 We can add this to our app by creating `src/server/protocol.rs` with the following contents:
 
@@ -326,7 +318,7 @@ We can use the Tokio `Service` trait to implement our server. Services in Tokio 
 to `Response` that are decoupled from their underlying protocols. This abstraction allows us to have our server
 implement many protocols (e.g. streaming and non-streaming) with a single implementation.
 
-We can implement the `Service` trait for our server by adding the following `src/server/mod.rs` file:
+We can implement the `Service` trait for our server by creating the following `src/server/mod.rs` file:
 
 ```rust
 use futures::{future, Future};
@@ -373,18 +365,21 @@ impl<T: DB> Service for Server<T> {
 }
 ```
 
-Our server now has a reference to a `DB` instance and and implements the `call` method to produce a `Response` type for
-a given `Request`. For our database the logic is pretty simple. Each connection the server receives can now create a
-new server instance and pass in a thread safe reference to the database. The mutex ensures that only one thread is
-accessing the database at any given time and so we can have our database process the command object and return the
-result.
+Our server struct has a reference to a `DB` instance and and implements the `call` method to produce a `Response` type
+for a given `Request`. The body of our `call` method is pretty simple. Each connection the server receives can now
+create a new server instance and pass in a thread safe reference to the database. The mutex ensures that only one thread
+is accessing the database at any given time and with that we can have our database safely process each command and
+return the result.
+
+Our server is now implemented, but we are not yet able to receive requests until we specify how our server makes
+itself available for connections. We can add that now.
 
 ## Listening On A Port
 
 In order for computers with a single address to run multiple applications all connecting to the network, each application
-must bind to a different port. In the real world you might check the list that the Internet Assigned Numbers Authority
-maintains of [registered port numbers](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers). But for our
-simple use case we will bind to port `12345` as an example.
+must bind to a different port number. In the real world you might check the list that the Internet Assigned Numbers
+Authority maintains of [registered port numbers](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers). But
+for our simple use case we will bind to port `12345` as an example.
 
 Our `src/main.rs` file can now be re-written to be:
 
@@ -413,8 +408,8 @@ fn main() {
 }
 ```
 
-Now when our database application starts it first creates a new in memory db instance and uses the `handle` method to
-have a thread safe reference that each thread can update as they process commands. It then uses the `TcpServer` builder
+Now when our database application starts, it first creates a new in memory db instance and uses the `handle` method to
+have a safe reference that each thread can use to process commands as they come in. It then uses the `TcpServer` builder
 from the `tokio_proto` crate which accepts our line protocol and address as arguments. We then set the number of threads
 that will be used to the total number of CPU cores on the current machine via the `num_cpus` crate, and finally call
 `serve` which will block on the TCP socket and for each incoming connection, create a new `Server` instance with a
@@ -437,9 +432,9 @@ telnet: connect to address ::1: Connection refused
 Trying 127.0.0.1...
 Connected to localhost.
 Escape character is '^]'.
-GET user-1
+get user-1
 None
-PUT user-1 '{"first_name": "John", "last_name": "Doe"}'
+put user-1 '{"first_name": "John", "last_name": "Doe"}'
 None
 get user-1
 '{"first_name": "John", "last_name": "Doe"}'
@@ -448,10 +443,11 @@ get user-1
 ## For Next Time
 
 You now have a working in memory database that multiple clients can connect to and keep their data in sync. You saw how
-the Tokio stack helps you define codecs for encoding and decoding data, protocols for defining how requests and responses
-are sent between clients and servers, and services as functions that convert requests to responses.
+to build simple parsers with Nom and how the Tokio stack helps you define codecs for encoding and decoding data,
+protocols for defining how requests and responses are sent between clients and servers, and services for processing
+requests and returning responses.
 
-This program still has one glaring omission though and that is that the data is only persisted as long as the server is
+This program is still far from complete. One major issue that is that the data is only persisted as long as the server is
 running. Every restart of the application loses all data. This might be ok for some caching applications, but if we want
-to see how more general purpose databases work we will have to add some form of persistence on disk and recovery. In the
-next post I will show you how to do just that via what is called a Write Ahead Log.
+to see how more general purpose databases work we will have to add some form of persistence and recovery from disk. In
+the next post I will show you how to do just that via what is called a Write Ahead Log.
