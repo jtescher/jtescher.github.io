@@ -261,4 +261,4 @@ value-1
 ```
 
 Success! The database is now much more useful. In future posts I will add other common features like authentication,
-clustering, snapshoting, and on disk persistence so the amount of data stored could exceed available memory.
+clustering, snapshotting, and on disk persistence so the amount of data stored could exceed available memory.

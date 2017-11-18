@@ -61,7 +61,7 @@ Hello, world!
 
 ### Sketch the API
 
-Excellent. now that we have a working Rust app scaffold, let's sketch out a simple use case for storing and retrieving
+Excellent. Now that we have a working Rust app scaffold, let's sketch out a simple use case for storing and retrieving
 some data. Open your `src/main.rs` file and replace it with the following:
 
 ```rust
@@ -103,9 +103,9 @@ fn main() {
 ```
 
 Ok. If you try to build this project now it will of course not work because we haven't implemented any of these methods.
-The simplest working version of this would be an in-memory database that will be completely re-created every time we
-start the application. Let's start by making a trait to encode the API we sketched out in our main file. Create a new
-file `src/lib.rs` with the following trait:
+Let's get this working with an in-memory database that will be completely re-created every time we start the application.
+We can start by making a trait to encode the API we sketched out in our main file. To do this, create a new file
+`src/lib.rs` with the following trait:
 
 ```rust
 use std::collections::hash_map::Iter;

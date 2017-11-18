@@ -11,7 +11,7 @@ _This is part two of a series on learning intermediate programming concepts by w
 You can read part one [here](/writing-a-key-value-store-in-rust-part-one) first to catch up_.
 
 In the previous post we created a Rust crate that allows us to embed a simple key value store in another application.
-We can now extend this project to be available as a separate server that multiple clients can connect to over a network.
+We can now extend this project to be available as a server that multiple clients can connect to over a network.
 
 There is a great project in the Rust ecosystem called [Tokio](https://tokio.rs) that describes itself as "A platform for
 writing fast networking code with Rust." and it will allow us to define a network protocol that we can use to interact
@@ -259,7 +259,7 @@ As you can see our `parse_command` function now does what we want by taking a `&
 command is created using the `named!` macro provided by nom and the accompanying `do_parse` macros are fairly easy to
 understand without needing to fully grasp the complexity of how parsers work. Keys and values can be extracted from their
 space delimited position. For example the bytes of the string "GET user-1" are converted into
-`DBCommand::Get("user-1")` by matching the string "get" uppercase or lower case, then one or more white spaces and then
+`DBCommand::Get("user-1")` by matching "get" uppercase or lower case, then one or more white spaces, and then
 the rest of the bytes are extracted as the string for the key we want to get.
 
 Once we have our parser and codec we need to define how clients should interact with our server via the line protocol
@@ -365,11 +365,11 @@ impl<T: DB> Service for Server<T> {
 }
 ```
 
-Our server struct has a reference to a `DB` instance and and implements the `call` method to produce a `Response` type
-for a given `Request`. The body of our `call` method is pretty simple. Each connection the server receives can now
-create a new server instance and pass in a thread safe reference to the database. The mutex ensures that only one thread
-is accessing the database at any given time and with that we can have our database safely process each command and
-return the result.
+Our server struct has a reference to a `DB` instance and and implements the `call` method to produce a `Response` for a
+given `Request`. The body of our `call` method is pretty simple. Each connection the server receives can now create a
+new server instance and pass in a thread safe reference to the database. The mutex ensures that only one thread is
+accessing the database at any given time and with that we can have our database safely process each command and return
+the result.
 
 Our server is now implemented, but we are not yet able to receive requests until we specify how our server makes
 itself available for connections. We can add that now.
@@ -409,7 +409,7 @@ fn main() {
 ```
 
 Now when our database application starts, it first creates a new in memory db instance and uses the `handle` method to
-have a safe reference that each thread can use to process commands as they come in. It then uses the `TcpServer` builder
+build a safe reference that each thread can use to process commands as they come in. It then uses the `TcpServer` builder
 from the `tokio_proto` crate which accepts our line protocol and address as arguments. We then set the number of threads
 that will be used to the total number of CPU cores on the current machine via the `num_cpus` crate, and finally call
 `serve` which will block on the TCP socket and for each incoming connection, create a new `Server` instance with a
@@ -442,10 +442,10 @@ get user-1
 
 ## For Next Time
 
-You now have a working in memory database that multiple clients can connect to and keep their data in sync. You saw how
-to build simple parsers with Nom and how the Tokio stack helps you define codecs for encoding and decoding data,
-protocols for defining how requests and responses are sent between clients and servers, and services for processing
-requests and returning responses.
+You now have a working in memory database that can be embedded or run as a server where multiple clients can connect and
+keep their data in sync. You saw how to build simple parsers with Nom and how the Tokio stack helps you define codecs
+for encoding and decoding data, protocols for defining how requests and responses are structured, and services for
+processing requests and returning responses.
 
 This program is still far from complete. One major issue that is that the data is only persisted as long as the server is
 running. Every restart of the application loses all data. This might be ok for some caching applications, but if we want
